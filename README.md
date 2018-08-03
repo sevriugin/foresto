@@ -3,7 +3,10 @@
 The project is designed to be a mobile application. It realizes insurance for customers as blockchain tokens. The tokens to be a part of ethereum smart contracts. Partners emit tokens to customers.
 
 1. Install meteor: https://www.meteor.com/install
-2. Pull the project to a folder
+2. Clone the project to a folder:
+   git clone https://github.com/Urigo/angular-meteor-base myApp
+   $ cd myApp
+   $ meteor npm install
 3. Install meteor packages:
 * meteor add accounts-base
 * meteor add accounts-meteor-developer
