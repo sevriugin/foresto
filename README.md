@@ -5,7 +5,7 @@ The project is designed to be a mobile application. It realizes insurance for cu
 1. Install meteor: https://www.meteor.com/install
 2. Clone the project to a folder:
    * git clone https://github.com/alexander-neznakhin/meteor-token myApp
-   * cd meteor-token
+   * cd myApp
    
 3. Install meteor packages:
 
