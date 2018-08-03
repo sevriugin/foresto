@@ -1,0 +1,21 @@
+<header>
+  <h2>TaskId: {{taskId}}</h2>
+</header>
+
+<header *ngFor="let task of tasks | async">
+  <h2>"{{task.text}}"</h2>
+  <p>{{task.text}}</p>
+</header>
+
+<form *ngIf="task" (submit)="save()">
+  <h2>"{{task.text}}"</h2>
+  <label>Text: </label>
+  <input type="text" [(ngModel)]="task.text" name="text">
+  <br>
+  <label>Text: </label>
+  <input type="checkbox" [(ngModel)]="task.public" name="public">
+  <br>
+  <button type="submit">Save</button>
+  <br>
+  <a [routerLink]="['/']">Cancel</a>
+</form>

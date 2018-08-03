@@ -1,0 +1,29 @@
+<header>
+  <h2>Tasks<!--  ( {{$ctrl.incompleteCount}} ) --></h2>
+    
+<!--   <label class="hide-completed"> -->
+<!--     <input type="checkbox" [(ngModel)]="hideCompleted"/> -->
+<!--     Hide Completed Tasks -->
+<!--   </label> -->
+    
+  <form class="new-task" (ngSubmit)="add({'text': newTask}); newTask=''">
+    <input [(ngModel)]="newTask" type="text" name="text" placeholder="Type to add new tasks"/>
+  </form>
+</header>
+
+<input type="text" #searchtext placeholder="Search by Text">
+<button type="button" (click)="search(searchtext.value)">Search</button>
+
+<ul>
+  <li *ngFor="let task of tasks | async">
+    <span class="text">
+      <strong>{{task._createdBy}}</strong> -
+      {{task._id}} -
+      <!-- <a [routerLink]="['/task', task._id._str]">{{task.text}}</a> -->
+      <a [routerLink]="['/task', task._id]">{{task.text}}</a>
+      <button (click)="remove(task)">x</button>
+    </span>
+  </li>
+</ul>
+
+<tasks-form></tasks-form>

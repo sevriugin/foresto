@@ -1,0 +1,9 @@
+<form [formGroup]="addForm" (ngSubmit)="addTask()">
+  <label>Text</label>
+  <input type="text" formControlName="text">
+  <br> 
+  <label>Public</label>
+  <input type="checkbox" formControlName="public">
+  <br>     
+  <button type="submit">Add</button>
+</form>

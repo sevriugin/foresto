@@ -1,0 +1,5 @@
+<h2>Войти как...</h2>
+  
+<nav>
+  <a *ngFor="let owner of owners | async" [routerLink]="['/owner-login', owner._id]">Владелец</a>
+</nav>
