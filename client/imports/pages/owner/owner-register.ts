@@ -30,22 +30,13 @@ export class OwnerRegisterPage implements OnInit, OnDestroy {
       return;
     }
 
-    //->>
-    //Meteor.users.update({ _id: Meteor.userId() }, { $addToSet: { roles: 'admin' } })
-    //const n = Meteor.users.update({ _id: Meteor.userId() }, { $set: { 'profile.role': 'owner' } }, {}, (err) => {
-    const n = Meteor.users.update({ _id: Meteor.userId() }, { $set: { 'emails[0].address': 'a.neznakhin@mail.ru' } }, {}, (err) => {
-      if (err) {
-        alert('error: ' + err);
-      };
+    this.loginService.registerOwner(this.email)
+    .then(() => {
+      this.router.navigate(['/owner']);
+    })
+    .catch((e) => {
+      this.handleError(e);
     });
-    alert('n: ' + n);
-    //this.loginService.registerOwner(this.email)
-    //.then(() => {
-    //  this.router.navigate(['/owner']);
-    //})
-    //.catch((e) => {
-    //  this.handleError(e);
-    //});
   }
  
   valid(): boolean {

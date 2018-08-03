@@ -1,5 +1,3 @@
-import { Meteor } from 'meteor/meteor';
-
 import { User, USER_PUBLIC } from 'both/models';
 import { Users }             from 'both/collections';
 

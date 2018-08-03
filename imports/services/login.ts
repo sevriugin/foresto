@@ -5,8 +5,7 @@ import { UserRole, UserRoleLoc } from 'both/models';
 @Injectable()
 export class LoginService {
 
-  constructor() {
-  }
+  constructor() {}
  
   registerOwner(email: string): Promise<void> {
     return new Promise<void>((resolve, reject) => {

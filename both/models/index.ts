@@ -18,5 +18,4 @@ export enum Pattern {
 }
 
 export * from './user';
-
 export * from './task';

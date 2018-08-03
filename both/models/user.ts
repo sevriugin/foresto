@@ -10,6 +10,9 @@ export interface User extends Meteor.User {
   profile?: Profile;
 }
 
+// Эти поля публикуются в любом случае.
 export const USER_PUBLIC = { 
-  _id: 1
+  _id: 1,
+  emails: 1,
+  profile: 1
 };

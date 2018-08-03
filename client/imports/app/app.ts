@@ -15,14 +15,12 @@ export class App implements OnInit, OnDestroy {
  
   user: User;
 
-  userStr: string;
-
   constructor(
     readonly router: Router,
     readonly loginService: LoginService
   ) {}
 
-  ngOnInit() {this.userStr = JSON.stringify(this.user);}
+  ngOnInit() {}
 
   logout() {
     this.loginService.logout()

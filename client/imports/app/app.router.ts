@@ -9,10 +9,10 @@ import { TasksPage, TaskDetails }                       from '../pages/tasks';
 export const routes: Routes = [
   { path: '', redirectTo: '/start', pathMatch: 'full' },
   { path: 'start',            component: StartPage },
+  { path: 'roles',            component: RolesPage },
   { path: 'owner-register',   component: OwnerRegisterPage },
   { path: 'owner-login/:_id', component: OwnerLoginPage },
   { path: 'owner',            component: OwnerPage },
-  { path: 'roles',            component: RolesPage },
   { path: 'tasks',            component: TasksPage },
   { path: 'task/:taskId',     component: TaskDetails },
   //{ path: 'tasks',          component: TasksPage,   canActivate: ['loggedOut'] },

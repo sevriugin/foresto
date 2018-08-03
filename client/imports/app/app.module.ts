@@ -25,8 +25,8 @@ import { TASKS_PAGES } from '../pages/tasks';
     App,
     START_PAGES,
     ROLES_PAGES,
-    TASKS_PAGES,
-    OWNER_PAGES
+    OWNER_PAGES,
+    TASKS_PAGES
   ],
   providers: [
     ErrorHandler,
