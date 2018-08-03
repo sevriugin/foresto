@@ -4,10 +4,11 @@ The project is designed to be a mobile application. It realizes insurance for cu
 
 1. Install meteor: https://www.meteor.com/install
 2. Clone the project to a folder:
-   git clone https://github.com/Urigo/angular-meteor-base myApp
-   $ cd myApp
+   * git clone https://github.com/alexander-neznakhin/meteor-token meteor-token
+   
    $ meteor npm install
 3. Install meteor packages:
+   * cd meteor-token
 * meteor add accounts-base
 * meteor add accounts-meteor-developer
 * meteor add accounts-password
