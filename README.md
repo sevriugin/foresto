@@ -3,7 +3,8 @@
 The project is designed to be a mobile application. It realizes insurance for customers as blockchain tokens. The tokens to be a part of ethereum smart contracts. Partners emit tokens to customers.
 
 1. Install meteor: https://www.meteor.com/install
-2. Install meteor packages:
+2. Pull the project to a folder
+3. Install meteor packages:
 * meteor add accounts-base
 * meteor add accounts-meteor-developer
 * meteor add accounts-password
@@ -24,3 +25,8 @@ The project is designed to be a mobile application. It realizes insurance for cu
 * meteor add standard-minifier-css
 * meteor add standard-minifier-js
 * meteor add tracker
+4. Start meteor:
+* meteor
+5. Open: https://localhost:3000
+
+Important: For a while use ****** as fixed password.
