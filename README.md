@@ -9,11 +9,11 @@ The project is designed to be a mobile application. It realizes insurance for cu
    
 3. Install meteor packages:
 
-try
+   try
 
    * meteor npm install
 
-or
+   or
 
    * meteor add accounts-base
    * meteor add accounts-meteor-developer
