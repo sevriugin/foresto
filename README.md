@@ -27,6 +27,6 @@ The project is designed to be a mobile application. It realizes insurance for cu
 * meteor add tracker
 4. Start meteor:
 * meteor
-5. Open: https://localhost:3000
+5. Open: http://localhost:3000
 
-Important: For a while use ****** as fixed password.
+For a while use ****** as fixed password.
