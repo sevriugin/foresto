@@ -4,16 +4,18 @@ The project is designed to be a mobile application. It realizes insurance for cu
 
 1. Install meteor: https://www.meteor.com/install
 2. Clone the project to a folder:
-   * git clone https://github.com/alexander-neznakhin/meteor-token meteor-token
+* git clone https://github.com/alexander-neznakhin/meteor-token meteor-token
    
-   $ meteor npm install
 3. Install meteor packages:
-   * cd meteor-token
+* cd meteor-token
+and try
+* meteor npm install
+or
 * meteor add accounts-base
-* meteor add accounts-meteor-developer
-* meteor add accounts-password
-* meteor add accounts-ui
-* meteor add alanning:roles
+ * meteor add accounts-meteor-developer
+  * meteor add accounts-password
+   * meteor add accounts-ui
+    * meteor add alanning:roles
 * meteor add angular-compilers
 * meteor add check
 * meteor add ecmascript
