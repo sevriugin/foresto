@@ -8,12 +8,9 @@ import 'angular2-meteor-polyfills';
 
 import { AppModule } from './imports/app/app.module';
 
-Meteor.startup(() => {
-  //->
-  //Meteor.subscribe('users', () => console.log(Meteor.users.find().count()));
-  MeteorObservable.subscribe('users').subscribe(() => console.log(Meteor.users.find().count()));
-  console.log(Meteor.users.find().count());
+import 'both/methods';
 
+Meteor.startup(() => {
   const subscription = MeteorObservable.autorun().subscribe(() => {
     if (Meteor.loggingIn()) {
       return;

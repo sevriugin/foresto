@@ -1,17 +1,13 @@
 
-<h2>Регистрация владельца</h2>
+<h3>Регистрация владельца</h3>
+<br>
 
 <div>
   Пожалуйста, укажите <b>адрес электронной почты</b>.
-</div>
-<div>
-  На него будет отправлено сообщение <b>для проверки</b>.
 </div>
 <br>
 
 <input [(ngModel)]="email" (keypress)="onInputKeypress($event)" placeholder="Адрес электронной почты" required #ngEmail="ngModel" pattern={{emailPattern}}/>
 <br>
-<br>
-<div *ngIf="ngEmail.errors?.required">Адрес электронной почты - обязательное поле.</div>
-<div *ngIf="ngEmail.errors?.pattern">Адрес электронной почты - my@ema.il</div>
+<div *ngIf="ngEmail.errors?.pattern"><br>Формат адреса - my@ema.il</div>
 <button (click)="register()" [disabled]="!ngEmail.valid">Зарегистрироваться</button>

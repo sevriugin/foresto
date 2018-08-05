@@ -1,13 +1,9 @@
-
-<h2>Вход владельца</h2>
-
 <div>
-  Пожалуйста, введите <b>пароль</b>.
+  <h3>Пожалуйста, введите <b>пароль</b>.</h3>
 </div>
 <br>
 
 <input [(ngModel)]="pass" (keypress)="onInputKeypress($event)" placeholder="Пароль" required #ngPass="ngModel" type="password"/>
 <br>
 <br>
-<div *ngIf="ngPass.errors?.required">Пароль - обязательное поле.</div>
 <button (click)="login()" [disabled]="!ngPass.valid">Войти</button>

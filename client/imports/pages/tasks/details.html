@@ -15,6 +15,8 @@
   <label>Text: </label>
   <input type="checkbox" [(ngModel)]="task.public" name="public">
   <br>
+  <button (click)="invite(user)">Invite Me</button>
+  <br>
   <button type="submit">Save</button>
   <br>
   <a [routerLink]="['/']">Cancel</a>

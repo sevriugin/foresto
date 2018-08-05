@@ -5,7 +5,7 @@ import { LoginService } from 'imports/services';
 import { Pattern }      from 'both/models';
 
 @Component({
-  templateUrl: './owner-register.html'
+  templateUrl: './owner-register-page.html'
 })
 export class OwnerRegisterPage implements OnInit, OnDestroy {
   

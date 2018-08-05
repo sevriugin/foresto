@@ -1,0 +1,10 @@
+
+<div>
+  <b>добавить...</b>
+</div>
+<br>
+
+<input [(ngModel)]="email" (keypress)="onInputKeypress($event)" placeholder="Адрес электронной почты" #ngEmail="ngModel" pattern={{emailPattern}}/>
+<br>
+<div *ngIf="ngEmail.errors?.pattern"><br>Формат адреса - my@ema.il</div>
+<button (click)="addPartner(email)" [disabled]="!email || !ngEmail.valid">Добавить</button>

@@ -7,19 +7,24 @@ import { User, UserRole }  from 'both/models';
 import { Users }           from 'both/collections';
 
 @Component({
-  templateUrl: './roles-page.html'
+  selector: 'start-roles-form',
+  templateUrl: './start-roles-form.html'
 })
-export class RolesPage implements OnInit, OnDestroy {
+export class StartRolesForm implements OnInit, OnDestroy {
 
   usersSub: Subscription;
-  owners: Observable <User[]>;
+  usersOwner: User[];
+  usersPartner: User[];
 
   constructor() {}
 
   ngOnInit() {
-    this.usersSub = MeteorObservable.subscribe('users').subscribe(() => {
-
-      this.owners = Users.find({ 'profile.role': UserRole.OWNER });
+    this.usersSub = MeteorObservable.subscribe('usersOwnerPartner').subscribe(() => {
+    
+      MeteorObservable.autorun().subscribe(() => {
+        this.usersOwner = Users.find({ 'profile.role': UserRole.OWNER }).fetch().slice(0, 3);
+        this.usersPartner = Users.find({ 'profile.role': UserRole.PARTNER }).fetch().slice(0, 3);
+      });
     });
   }
 

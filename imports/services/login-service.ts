@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable }       from '@angular/core';
 
 import { UserRole, UserRoleLoc } from 'both/models';
 
@@ -20,6 +20,18 @@ export class LoginService {
   }
 
   loginOwner(email: string, pass: string): Promise<void> {
+    return new Promise<void>((resolve, reject) => {
+      Meteor.loginWithPassword({ email: email }, pass, (e: Error) => {
+        if (e) {
+          return reject(e);
+        }
+     
+        resolve();
+      });
+    });
+  }
+ 
+  loginPartner(email: string, pass: string): Promise<void> {
     return new Promise<void>((resolve, reject) => {
       Meteor.loginWithPassword({ email: email }, pass, (e: Error) => {
         if (e) {

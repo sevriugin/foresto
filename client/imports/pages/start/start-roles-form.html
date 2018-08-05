@@ -1,0 +1,23 @@
+<h3>Войти как...</h3>
+
+<nav>
+  <table>
+    <tr>
+      <td *ngFor="let owner of usersOwner">
+        <a [routerLink]="['/owner-login', owner._id]">Владелец</a>
+      </td>
+    </tr>
+  </table>
+</nav>
+  
+<h3>партнер...</h3>
+
+<nav>
+  <table>
+    <tr>
+      <td *ngFor="let partner of usersPartner">
+        <a [routerLink]="['/partner-login', partner._id]">{{partner.emails[0].address}}</a>
+      </td>
+    </tr>
+  </table>
+</nav>

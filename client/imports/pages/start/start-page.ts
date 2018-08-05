@@ -17,6 +17,9 @@ export class StartPage implements OnInit, OnDestroy {
   user: User;
   usersSub: Subscription;
 
+  userOwnerCount: number;
+  userPartner: User;
+
   constructor(
     readonly router: Router,
     readonly loginService: LoginService
@@ -43,19 +46,23 @@ export class StartPage implements OnInit, OnDestroy {
     }
 
     if (!this.user) {
-      this.usersSub = MeteorObservable.subscribe('users').subscribe(() => {
+      this.usersSub = MeteorObservable.subscribe('usersOwnerPartner').subscribe(() => {
 
-        const ownerUser: User = Users.collection.findOne({ 'profile.role': UserRole.OWNER });
-        const partnerExists: boolean = !!Users.collection.findOne({ profile: { role: UserRole.PARTNER } });
+        const selectorOwner = { 'profile.role': UserRole.OWNER };
+        const usersOwner = Users.collection.find(selectorOwner);
+        this.userOwnerCount = usersOwner.count();
 
-        if (!ownerUser) {
+        const selectorPartner = { 'profile.role': UserRole.PARTNER };
+        this.userPartner = Users.collection.findOne(selectorPartner);
+
+        if (this.userOwnerCount == 0) {
+
           this.router.navigate(['/owner-register']);
         } 
-        else if (!partnerExists) {
-          this.router.navigate(['/owner-login', ownerUser._id]);
-        }
-        else {
-          this.router.navigate(['/roles']);
+        else if (this.userOwnerCount <= 1 && ! this.userPartner) {
+
+          const _id = usersOwner.fetch()[0]._id;
+          this.router.navigate(['/owner-login', _id]);
         }
         
       });

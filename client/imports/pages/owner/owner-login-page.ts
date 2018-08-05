@@ -7,7 +7,7 @@ import { Users }        from 'both/collections';
 import { LoginService } from 'imports/services';
 
 @Component({
-  templateUrl: './owner-login.html'
+  templateUrl: './owner-login-page.html'
 })
 export class OwnerLoginPage implements OnInit, OnDestroy {
   
@@ -28,7 +28,7 @@ export class OwnerLoginPage implements OnInit, OnDestroy {
     .map(params => params['_id'])
     .subscribe(_id => {
 
-      this.usersSub = MeteorObservable.subscribe('users').subscribe(() => {
+      this.usersSub = MeteorObservable.subscribe('usersOwnerPartner').subscribe(() => {
         const user = Users.findOne({ _id: _id });
         if (!user) {
           this.handleError(new Error('Пользователь не найден!'));
