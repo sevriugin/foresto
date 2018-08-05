@@ -40,7 +40,6 @@ The project is designed to be a mobile application. It realizes insurance for cu
 5. Open: http://localhost:3000
 
 To get updates:
-
    * git pull
 
 For a while use ****** as fixed password.
