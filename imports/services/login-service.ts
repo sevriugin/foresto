@@ -1,6 +1,6 @@
 import { Injectable }       from '@angular/core';
 
-import { UserRole, UserRoleLoc } from 'both/models';
+import { UserRole } from 'both/models';
 
 @Injectable()
 export class LoginService {
@@ -9,7 +9,7 @@ export class LoginService {
  
   registerOwner(email: string): Promise<void> {
     return new Promise<void>((resolve, reject) => {
-      const userId = Accounts.createUser({email: email, password: '******', profile: { role: UserRole.OWNER, roleLoc: UserRoleLoc.owner }}, (e: Error) => {
+      const userId = Accounts.createUser({email: email, password: '******', profile: { role: UserRole.OWNER }}, (e: Error) => {
         if (e) {
           return reject(e);
         }
@@ -34,6 +34,18 @@ export class LoginService {
   loginPartner(email: string, pass: string): Promise<void> {
     return new Promise<void>((resolve, reject) => {
       Meteor.loginWithPassword({ email: email }, pass, (e: Error) => {
+        if (e) {
+          return reject(e);
+        }
+     
+        resolve();
+      });
+    });
+  }
+ 
+  loginClient(phone: string, code: string): Promise<void> {
+    return new Promise<void>((resolve, reject) => {
+      Meteor.loginWithPassword({ username: phone }, code, (e: Error) => {
         if (e) {
           return reject(e);
         }

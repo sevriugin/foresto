@@ -9,6 +9,10 @@
     Визит <b>партнера</b>, e-mail: <b>{{user.emails[0].address}}</b>.
     <button (click)="logout()">Выйти</button>
   </div>
+  <div *ngIf="user.profile.role == 'client'">
+    Добрый день, <b>клиент</b>, телефон: <b>{{user.username}}</b>.
+    <button (click)="logout()">Выйти</button>
+  </div>
 </div>
 
 <router-outlet></router-outlet>

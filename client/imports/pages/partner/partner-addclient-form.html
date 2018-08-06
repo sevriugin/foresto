@@ -1,0 +1,10 @@
+
+<div>
+  <b>добавить...</b>
+</div>
+<br>
+
+<input [(ngModel)]="phone" (keypress)="onInputKeypress($event)" placeholder="+7 (123) 456-7890" [textMask]="{mask: phoneMask}" #ngPhone="ngModel" pattern={{phonePattern}}/>
+<br>
+<div *ngIf="ngPhone.errors?.pattern"><br>Формат номера: +7 (123) 456-7890</div>
+<button (click)="addClient(phone)" [disabled]="!phone || !ngPhone.valid">Добавить</button>

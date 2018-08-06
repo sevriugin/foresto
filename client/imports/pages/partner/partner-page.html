@@ -10,7 +10,30 @@
 <div *ngIf="user">
   <h3>Клиенты:</h3>
 
-  <div>
+  <div [hidden]="! ready || userClient">
     <h4>[ у Вас пока нет клиентов ]</h4>
+
+    <partner-addclient-form></partner-addclient-form>
+  </div>
+
+  <div [hidden]="! ready || ! userClient">
+    <br>
+    <ul class="items">
+      <li *ngFor="let user of usersClient | async">
+        <a (click)="alert('Чтобы войти как Клиент,'+'\n'+'нужно выйти из текущего сеанса.')">
+          <span class="badge"></span>
+          <span class="text">{{user.username}}</span> 
+        </a>
+        <button class="delete" title="Удалить клиента" (click)="deleteClient(user)">x</button>
+      </li>
+    </ul>
+        
+    <partner-addclient-form></partner-addclient-form>
+  </div>
+
+  <h3 [hidden]="! ready">Предложения:</h3>
+
+  <div [hidden]="! ready">
+    <h4>[ пока нет предложений ]</h4>
   </div>
 </div>

@@ -4,6 +4,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { StartPage }                                    from '../pages/start';
 import { OwnerRegisterPage, OwnerLoginPage, OwnerPage } from '../pages/owner';
 import { PartnerLoginPage, PartnerPage }                from '../pages/partner';
+import { ClientLoginPage, ClientPage }                  from '../pages/client';
 import { TasksPage, TaskDetails }                       from '../pages/tasks';
 
 export const routes: Routes = [
@@ -14,6 +15,8 @@ export const routes: Routes = [
   { path: 'owner',              component: OwnerPage },
   { path: 'partner-login/:_id', component: PartnerLoginPage },
   { path: 'partner',            component: PartnerPage },
+  { path: 'client-login/:_id',  component: ClientLoginPage },
+  { path: 'client',             component: ClientPage },
   { path: 'tasks',              component: TasksPage },
   { path: 'task/:taskId',       component: TaskDetails },
   //{ path: 'task/:taskId', component: TaskDetails, canActivate: ['loggedIn'] },

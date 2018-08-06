@@ -1,18 +1,19 @@
 
-import { UserRole, UserRoleLoc } from '.';
+import { UserRole } from '.';
 
 export interface Profile {
   role: UserRole;
-  roleLoc: UserRoleLoc;
+  _createdBy?: string;
 }
 
 export interface User extends Meteor.User {
   profile?: Profile;
 }
 
-// Эти поля публикуются в любом случае.
+// But username, the fields is published anyway.
 export const USER_PUBLIC = { 
   _id: 1,
+  username: 1,
   emails: 1,
   profile: 1
 };

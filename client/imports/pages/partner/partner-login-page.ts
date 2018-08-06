@@ -28,8 +28,8 @@ export class PartnerLoginPage implements OnInit, OnDestroy {
     .map(params => params['_id'])
     .subscribe(_id => {
 
-      this.usersSub = MeteorObservable.subscribe('usersOwnerPartner').subscribe(() => {
-        const user = Users.findOne({ _id: _id });
+      this.usersSub = MeteorObservable.subscribe('userPartner', _id).subscribe(() => {
+        const user = Users.findOne(_id);
         if (!user) {
           this.handleError(new Error('Пользователь не найден!'));
           return;

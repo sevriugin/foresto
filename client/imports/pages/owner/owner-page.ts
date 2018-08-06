@@ -23,7 +23,7 @@ export class OwnerPage implements OnInit, OnDestroy {
   constructor() {}
 
   ngOnInit() {
-    this.usersSub = MeteorObservable.subscribe('usersOwnerPartner').subscribe(() => {
+    this.usersSub = MeteorObservable.subscribe('usersPartner').subscribe(() => {
       
       const selector = { 'profile.role': UserRole.PARTNER };
       this.usersPartner = Users.find(selector);
