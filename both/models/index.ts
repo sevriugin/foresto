@@ -16,5 +16,8 @@ export enum Pattern {
 
 export const Mask_PHONE = ['+', '7', ' ', '(', /[1-9]/, /\d/, /\d/, ')', ' ', /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/];
 
+export const OfferSize = ['Большой', 'Средний'];
+
 export * from './user';
+export * from './offer';
 export * from './task';

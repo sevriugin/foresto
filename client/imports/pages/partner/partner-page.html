@@ -10,16 +10,16 @@
 <div *ngIf="user">
   <h3>Клиенты:</h3>
 
-  <div [hidden]="! ready || userClient">
+  <div [hidden]="! clientReady || ! offerReady || client">
     <h4>[ у Вас пока нет клиентов ]</h4>
 
     <partner-addclient-form></partner-addclient-form>
   </div>
 
-  <div [hidden]="! ready || ! userClient">
+  <div [hidden]="! clientReady || ! offerReady || ! client">
     <br>
     <ul class="items">
-      <li *ngFor="let user of usersClient | async">
+      <li *ngFor="let user of clients | async">
         <a (click)="alert('Чтобы войти как Клиент,'+'\n'+'нужно выйти из текущего сеанса.')">
           <span class="badge"></span>
           <span class="text">{{user.username}}</span> 
@@ -31,9 +31,26 @@
     <partner-addclient-form></partner-addclient-form>
   </div>
 
-  <h3 [hidden]="! ready">Предложения:</h3>
+  <h3 [hidden]="! clientReady || ! offerReady">Предложения:</h3>
 
-  <div [hidden]="! ready">
+  <div [hidden]="! clientReady || ! offerReady || offer">
     <h4>[ пока нет предложений ]</h4>
+
+    <partner-addoffer-form></partner-addoffer-form>
+  </div>
+
+  <div [hidden]="! clientReady || ! offerReady || ! offer">
+    <br>
+    <ul class="offers">
+      <li *ngFor="let item of offers | async">
+        <a>
+          <span class="badge"></span>
+          <span class="text">{{item.validFrom}} - {{item.expired}}: <b>{{item.header}}</b></span> 
+        </a>
+        <button class="deleteOffer" title="Удалить предложение" (click)="deleteOffer(item)">x</button>
+      </li>
+    </ul>
+
+    <partner-addoffer-form></partner-addoffer-form>
   </div>
 </div>

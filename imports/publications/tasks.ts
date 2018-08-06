@@ -3,7 +3,7 @@ import { Meteor } from 'meteor/meteor';
 import { Tasks }       from 'both/collections';
 import { TASK_PUBLIC } from 'both/models';
 
-Meteor.publish('tasks', function() {
+Meteor.publish('tasks', () => {
   return Tasks.find(buildQuery.call(this), { fields: TASK_PUBLIC });
 });
    

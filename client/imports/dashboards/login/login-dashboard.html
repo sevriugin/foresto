@@ -1,0 +1,14 @@
+<div *ngIf="user">
+  <div *ngIf="user.profile.role == 'owner'">
+    Вы <b>владелец</b>.
+    <button (click)="logout()">Выйти</button>
+  </div>
+  <div *ngIf="user.profile.role == 'partner'">
+    Визит <b>партнера</b>, e-mail: <b>{{user.emails[0].address}}</b>.
+    <button (click)="logout()">Выйти</button>
+  </div>
+  <div *ngIf="user.profile.role == 'client'">
+    Добрый день, <b>клиент</b>, телефон: <b>{{user.username}}</b>.
+    <button (click)="logout()">Выйти</button>
+  </div>
+</div>
