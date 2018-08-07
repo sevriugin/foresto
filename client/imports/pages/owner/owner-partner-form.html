@@ -1,0 +1,22 @@
+<div [hidden]="! ready">
+  <h3>Партнеры:</h3>
+  <br>
+
+  <div [hidden]="partner">
+    <h4>[ пока нет партнеров ]</h4>
+  </div>
+
+  <div [hidden]="! partner">
+    <ul class="items">
+      <li *ngFor="let user of partners | async">
+        <a (click)="alert('Чтобы войти как Партнер,'+'\n'+'нужно выйти из текущего сеанса.')">
+          <span class="badge"></span>
+          <span class="text">{{user.emails[0].address}}</span> 
+        </a>
+        <button class="delete" title="Удалить партнера" (click)="deletePartner(user)">x</button>
+      </li>
+    </ul>
+  </div>
+
+  <owner-partneradd-form></owner-partneradd-form>
+</div>

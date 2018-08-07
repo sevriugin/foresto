@@ -3,7 +3,8 @@
 </div>
 <br>
 
-<input [(ngModel)]="pass" (keypress)="onInputKeypress($event)" placeholder="Пароль" required #ngPass="ngModel" type="password"/>
+<input name="username" [(ngModel)]="email" [hidden]="true" type="text"/>
+<input name="password" [(ngModel)]="pass" (keypress)="onInputKeypress($event)" placeholder="Пароль" required #ngPass="ngModel" type="password"/>
 <br>
 <br>
 <button (click)="login()" [disabled]="!ngPass.valid">Войти</button>

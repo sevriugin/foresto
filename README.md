@@ -45,4 +45,7 @@ Later
 
    * git pull
 
-For a while use ****** as fixed password.
+For a while use: 
+
+   * ****** as fixed password,
+   * 1111 as fixed SMS-code.

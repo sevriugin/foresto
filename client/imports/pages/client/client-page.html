@@ -8,5 +8,14 @@
 </div>
       
 <div *ngIf="user">
-  <owner-partner-form></owner-partner-form>
+  <table>
+    <tr>
+      <td align="left" valign="top" width="430px">
+        <client-offer-form></client-offer-form>
+      </td>
+      <td align="left" valign="top">
+        <client-token-form></client-token-form>
+      </td>
+    </tr>
+  </table>
 </div>

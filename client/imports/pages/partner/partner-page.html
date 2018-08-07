@@ -1,4 +1,4 @@
-<div *ngIf="!user">
+<div *ngIf="! user">
   <div>
     Вам необходимо <b>авторизоваться</b>.
   </div>
@@ -6,11 +6,16 @@
     Перейдите <b>по ссылке</b>, полученной при регистрации.
   </div>
 </div>
-      
-<div *ngIf="user">
-  <h3>Клиенты:</h3>
 
-  <div>
-    <h4>[ у Вас пока нет клиентов ]</h4>
-  </div>
+<div *ngIf="user">
+  <table>
+    <tr>
+      <td align="left" valign="top" width="330px">
+        <partner-client-form></partner-client-form>
+      </td>
+      <td align="left" valign="top">
+        <partner-offer-form></partner-offer-form>
+      </td>
+    </tr>
+  </table>
 </div>

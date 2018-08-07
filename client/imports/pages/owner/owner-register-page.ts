@@ -1,5 +1,5 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
-import { Router }                       from '@angular/router';
+import { Component } from '@angular/core';
+import { Router }    from '@angular/router';
 
 import { LoginService } from 'imports/services';
 import { Pattern }      from 'both/models';
@@ -7,7 +7,7 @@ import { Pattern }      from 'both/models';
 @Component({
   templateUrl: './owner-register-page.html'
 })
-export class OwnerRegisterPage implements OnInit, OnDestroy {
+export class OwnerRegisterPage {
   
   email: string;
   readonly emailPattern = Pattern.EMAIL;
@@ -16,8 +16,6 @@ export class OwnerRegisterPage implements OnInit, OnDestroy {
     readonly router: Router,
     readonly loginService: LoginService
   ) {}
-
-  ngOnInit() {}
 
   onInputKeypress({keyCode}: KeyboardEvent): void {
     if (keyCode === 13) {
@@ -46,8 +44,6 @@ export class OwnerRegisterPage implements OnInit, OnDestroy {
 
     return result;
   }
-
-  ngOnDestroy() {}
 
   handleError(e: Error): void {
     console.error(e);

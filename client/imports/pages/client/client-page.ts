@@ -4,12 +4,14 @@ import { InjectUser } from 'angular2-meteor-accounts-ui';
 import { User } from 'both/models';
 
 @Component({
-  templateUrl: './owner-page.html'
+  templateUrl: './client-page.html'
 })
 @InjectUser('user')
-export class OwnerPage {
+export class ClientPage {
 
   user: User;
 
   constructor() {}
 }
+
+

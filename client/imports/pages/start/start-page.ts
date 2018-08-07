@@ -19,6 +19,7 @@ export class StartPage implements OnInit, OnDestroy {
 
   userOwnerCount: number;
   userPartner: User;
+  userClient: User;
 
   constructor(
     readonly router: Router,
@@ -27,26 +28,21 @@ export class StartPage implements OnInit, OnDestroy {
 
   ngOnInit() {
     if (this.user) {
-      var role;
-      if (this.user.profile) {
-        role = this.user.profile.role;
+      const role = this.user.profile && this.user.profile.role;
+      if (role && [ UserRole.OWNER, UserRole.PARTNER, UserRole.CLIENT ].indexOf(role) != -1) {
+        this.router.navigate(['/' + role]);
       }
-
-      if (role == UserRole.OWNER) {
-        this.router.navigate(['/owner']);
-      }
-      // other roles...
       else {
         this.loginService.logout()
-          .catch((e) => {
-            this.handleError(e);
-          });
+        .catch((e) => {
+          this.handleError(e);
+        });
+        this.user = null;
       }
-      this.user = null;
     }
 
-    if (!this.user) {
-      this.usersSub = MeteorObservable.subscribe('usersOwnerPartner').subscribe(() => {
+    if (! this.user) {
+      this.usersSub = MeteorObservable.subscribe('users').subscribe(() => {
 
         const selectorOwner = { 'profile.role': UserRole.OWNER };
         const usersOwner = Users.collection.find(selectorOwner);
@@ -55,11 +51,14 @@ export class StartPage implements OnInit, OnDestroy {
         const selectorPartner = { 'profile.role': UserRole.PARTNER };
         this.userPartner = Users.collection.findOne(selectorPartner);
 
+        const selectorClient = { 'profile.role': UserRole.CLIENT };
+        this.userClient = Users.collection.findOne(selectorPartner);
+
         if (this.userOwnerCount == 0) {
 
           this.router.navigate(['/owner-register']);
         } 
-        else if (this.userOwnerCount <= 1 && ! this.userPartner) {
+        else if (this.userOwnerCount <= 1 && ! this.userPartner && ! this.userClient) {
 
           const _id = usersOwner.fetch()[0]._id;
           this.router.navigate(['/owner-login', _id]);

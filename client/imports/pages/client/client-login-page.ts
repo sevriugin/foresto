@@ -7,15 +7,15 @@ import { Users }        from 'both/collections';
 import { LoginService } from 'imports/services';
 
 @Component({
-  templateUrl: './owner-login-page.html'
+  templateUrl: './client-login-page.html'
 })
-export class OwnerLoginPage implements OnInit, OnDestroy {
+export class ClientLoginPage implements OnInit, OnDestroy {
   
-  email: string;
-  pass: string;
+  phone: string;
+  code: string;
 
   paramsSub: Subscription;
-  ownerSub: Subscription;
+  clientSub: Subscription;
 
   constructor(
     readonly route: ActivatedRoute,
@@ -28,16 +28,16 @@ export class OwnerLoginPage implements OnInit, OnDestroy {
     .map(params => params['_id'])
     .subscribe(_id => {
 
-      this.ownerSub = MeteorObservable.subscribe('owner', _id).subscribe(() => {
+      this.clientSub = MeteorObservable.subscribe('client', _id).subscribe(() => {
         const user = Users.findOne(_id);
         if (! user) {
           this.handleError(new Error('Пользователь не найден!'));
           return;
         }
 
-        this.email = user.emails && user.emails[0].address;
-        if (!this.email) {
-          this.handleError(new Error('Email пользователя не задан!'));
+        this.phone = user.username;
+        if (! this.phone) {
+          this.handleError(new Error('Телефон пользователя не задан!'));
         }
       });
 
@@ -55,14 +55,14 @@ export class OwnerLoginPage implements OnInit, OnDestroy {
       return;
     }
 
-    if (! this.email) {
-      this.handleError(new Error('Email пользователя не задан!'));
+    if (! this.phone) {
+      this.handleError(new Error('Телефон пользователя не задан!'));
       return;
     }
 
-    this.loginService.loginOwner(this.email, this.pass)
+    this.loginService.loginClient(this.phone, this.code)
     .then(() => {
-      this.router.navigate(['/owner']);
+      this.router.navigate(['/client']);
     })
     .catch((e) => {
       this.handleError(e);
@@ -70,12 +70,12 @@ export class OwnerLoginPage implements OnInit, OnDestroy {
   }
  
   valid(): boolean {
-    return !! this.pass;
+    return !! this.code;
   }
 
   ngOnDestroy() {
     this.paramsSub.unsubscribe();
-    this.ownerSub.unsubscribe();
+    this.clientSub.unsubscribe();
   }
 
   handleError(e: Error): void {

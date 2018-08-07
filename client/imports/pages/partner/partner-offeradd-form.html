@@ -1,0 +1,29 @@
+
+<div>
+  <b>добавить...</b>
+</div>
+<br>
+
+<table>
+  <tr>
+    <td align="right"><label>Название:</label></td>
+    <td align="left"><input [(ngModel)]="header" placeholder="Название"/></td>
+  </tr>
+  <tr>
+    <td align="right"><label>Действительно с:</label></td>
+    <td align="left"><input [(ngModel)]="validFrom" type="date"/></td>
+  </tr>
+  <tr>
+    <td align="right"><label>Истекает:</label></td>
+    <td align="left"><input [(ngModel)]="expired" type="date"/></td>
+  </tr>
+  <tr>
+    <td align="right"><label>Размер:</label></td>
+    <td align="left">
+      <select [(ngModel)]="size" class="form-control" placeholder="Размер">
+        <option *ngFor="let sizeVal of sizes" [value]="sizeVal">{{sizeVal}}</option>
+      </select>
+    </td>
+  </tr>
+</table>
+<button (click)="addOffer()" [disabled]="! validFrom || ! expired || ! header || ! size">Добавить</button>

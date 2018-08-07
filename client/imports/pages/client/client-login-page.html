@@ -1,0 +1,10 @@
+<div>
+  <h3>Пожалуйста, введите <b>код</b> sms-код.</h3>
+</div>
+<br>
+
+<input name="username" [(ngModel)]="phone" [hidden]="true" type="text"/>
+<input name="password" [(ngModel)]="code" (keypress)="onInputKeypress($event)" placeholder="SMS-код" required minlength="4" maxlength="4" #ngCode="ngModel" type="password"/>
+<br>
+<br>
+<button (click)="login()" [disabled]="!ngCode.valid">Войти</button>

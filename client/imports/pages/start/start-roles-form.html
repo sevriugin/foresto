@@ -10,13 +10,35 @@
   </table>
 </nav>
   
-<h3>партнер...</h3>
+<h3 *ngIf="userPartner">партнер...</h3>
 
 <nav>
   <table>
     <tr>
       <td *ngFor="let partner of usersPartner">
         <a [routerLink]="['/partner-login', partner._id]">{{partner.emails[0].address}}</a>
+      </td>
+    </tr>
+  </table>
+</nav>
+
+<h3 *ngIf="userClient">клиент...</h3>
+
+<nav>
+  <table>
+    <tr>
+      <td *ngFor="let client of usersClient_1">
+        <a [routerLink]="['/client-login', client._id]">{{client.username}}</a>
+      </td>
+    </tr>
+    <tr>
+      <td *ngFor="let client of usersClient_2">
+        <a [routerLink]="['/client-login', client._id]">{{client.username}}</a>
+      </td>
+    </tr>
+    <tr>
+      <td *ngFor="let client of usersClient_3">
+        <a [routerLink]="['/client-login', client._id]">{{client.username}}</a>
       </td>
     </tr>
   </table>
