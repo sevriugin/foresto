@@ -8,27 +8,14 @@
 </div>
       
 <div *ngIf="user">
-  <h3>Токены:</h3>
-
-  <div>
-    <h4>[ у Вас пока нет токенов ]</h4>
-  </div>
-
-  <h3>Предложения:</h3>
-
-  <div [hidden]="! offerReady || offer">
-    <h4>[ пока нет предложений ]</h4>
-  </div>
-  
-  <div [hidden]="! offerReady || ! offer">
-    <br>
-    <ul class="offers">
-      <li *ngFor="let item of offers | async">
-        <a>
-          <span class="badge"></span>
-          <span class="text">{{item.validFrom}} - {{item.expired}}: <b>{{item.header}}</b></span> 
-        </a>
-      </li>
-    </ul>
-  </div>
+  <table>
+    <tr>
+      <td align="left" valign="top" width="430px">
+        <client-offer-form></client-offer-form>
+      </td>
+      <td align="left" valign="top">
+        <client-token-form></client-token-form>
+      </td>
+    </tr>
+  </table>
 </div>

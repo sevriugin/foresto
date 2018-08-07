@@ -11,11 +11,11 @@ import { LoginService } from 'imports/services';
 })
 export class OwnerLoginPage implements OnInit, OnDestroy {
   
-  paramsSub: Subscription;
-  usersSub: Subscription;
-
   email: string;
   pass: string;
+
+  paramsSub: Subscription;
+  ownerSub: Subscription;
 
   constructor(
     readonly route: ActivatedRoute,
@@ -28,9 +28,9 @@ export class OwnerLoginPage implements OnInit, OnDestroy {
     .map(params => params['_id'])
     .subscribe(_id => {
 
-      this.usersSub = MeteorObservable.subscribe('userOwner', _id).subscribe(() => {
+      this.ownerSub = MeteorObservable.subscribe('owner', _id).subscribe(() => {
         const user = Users.findOne(_id);
-        if (!user) {
+        if (! user) {
           this.handleError(new Error('Пользователь не найден!'));
           return;
         }
@@ -51,11 +51,11 @@ export class OwnerLoginPage implements OnInit, OnDestroy {
   }
  
   login(): void {
-    if (!this.valid()) {
+    if (! this.valid()) {
       return;
     }
 
-    if (!this.email) {
+    if (! this.email) {
       this.handleError(new Error('Email пользователя не задан!'));
       return;
     }
@@ -69,13 +69,13 @@ export class OwnerLoginPage implements OnInit, OnDestroy {
     })
   }
  
-  ngOnDestroy() {
-    this.paramsSub.unsubscribe();
-    this.usersSub.unsubscribe();
+  valid(): boolean {
+    return !! this.pass;
   }
 
-  valid(): boolean {
-    return !!this.pass;
+  ngOnDestroy() {
+    this.paramsSub.unsubscribe();
+    this.ownerSub.unsubscribe();
   }
 
   handleError(e: Error): void {

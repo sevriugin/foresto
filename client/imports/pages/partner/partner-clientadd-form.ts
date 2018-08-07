@@ -4,10 +4,10 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Pattern, Mask_PHONE } from 'both/models';
 
 @Component({
-  selector: 'partner-addclient-form',
-  templateUrl: './partner-addclient-form.html'
+  selector: 'partner-clientadd-form',
+  templateUrl: './partner-clientadd-form.html'
 })
-export class PartnerAddClientForm implements OnInit, OnDestroy {
+export class PartnerClientAddForm implements OnInit, OnDestroy {
   
   phone: string;
   readonly phonePattern = Pattern.PHONE;

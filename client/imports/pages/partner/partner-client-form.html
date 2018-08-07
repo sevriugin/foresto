@@ -1,0 +1,22 @@
+<div [hidden]="! clientReady">
+  <h3>Клиенты:</h3>
+  <br>
+
+  <div [hidden]="client">
+    <h4>[ у Вас пока нет клиентов ]</h4>
+  </div>
+
+  <div [hidden]="! client">
+    <ul class="items">
+      <li *ngFor="let user of clients | async">
+        <a (click)="alert('Чтобы войти как Клиент,'+'\n'+'нужно выйти из текущего сеанса.')">
+          <span class="badge"></span>
+          <span class="text">{{user.username}}</span> 
+        </a>
+        <button class="delete" title="Удалить клиента" (click)="deleteClient(user)">x</button>
+      </li>
+    </ul>
+  </div>
+
+  <partner-clientadd-form></partner-clientadd-form>
+</div>

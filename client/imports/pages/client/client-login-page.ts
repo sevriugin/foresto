@@ -3,7 +3,6 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute, Router }       from '@angular/router';
 import { Subscription }                 from 'rxjs/Subscription';
 
-import { Mask_SMS }     from 'both/models';
 import { Users }        from 'both/collections';
 import { LoginService } from 'imports/services';
 
@@ -12,12 +11,11 @@ import { LoginService } from 'imports/services';
 })
 export class ClientLoginPage implements OnInit, OnDestroy {
   
-  paramsSub: Subscription;
-  usersSub: Subscription;
-
   phone: string;
   code: string;
-  readonly smsMask = Mask_SMS;
+
+  paramsSub: Subscription;
+  clientSub: Subscription;
 
   constructor(
     readonly route: ActivatedRoute,
@@ -30,7 +28,7 @@ export class ClientLoginPage implements OnInit, OnDestroy {
     .map(params => params['_id'])
     .subscribe(_id => {
 
-      this.usersSub = MeteorObservable.subscribe('userClient', _id).subscribe(() => {
+      this.clientSub = MeteorObservable.subscribe('client', _id).subscribe(() => {
         const user = Users.findOne(_id);
         if (! user) {
           this.handleError(new Error('Пользователь не найден!'));
@@ -53,11 +51,11 @@ export class ClientLoginPage implements OnInit, OnDestroy {
   }
  
   login(): void {
-    if (!this.valid()) {
+    if (! this.valid()) {
       return;
     }
 
-    if (!this.phone) {
+    if (! this.phone) {
       this.handleError(new Error('Телефон пользователя не задан!'));
       return;
     }
@@ -71,13 +69,13 @@ export class ClientLoginPage implements OnInit, OnDestroy {
     })
   }
  
-  ngOnDestroy() {
-    this.paramsSub.unsubscribe();
-    this.usersSub.unsubscribe();
-  }
-
   valid(): boolean {
     return !! this.code;
+  }
+
+  ngOnDestroy() {
+    this.paramsSub.unsubscribe();
+    this.clientSub.unsubscribe();
   }
 
   handleError(e: Error): void {

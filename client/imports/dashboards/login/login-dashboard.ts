@@ -1,6 +1,6 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
-import { Router }                       from '@angular/router';
-import { InjectUser }                   from 'angular2-meteor-accounts-ui'; 
+import { Component }  from '@angular/core';
+import { Router }     from '@angular/router';
+import { InjectUser } from 'angular2-meteor-accounts-ui'; 
 
 import { User }         from 'both/models';
 import { LoginService } from 'imports/services';
@@ -10,7 +10,7 @@ import { LoginService } from 'imports/services';
   templateUrl: './login-dashboard.html'
 })
 @InjectUser('user')
-export class LoginDashboard implements OnInit, OnDestroy {
+export class LoginDashboard {
  
   user: User;
 
@@ -18,8 +18,6 @@ export class LoginDashboard implements OnInit, OnDestroy {
     readonly router: Router,
     readonly loginService: LoginService
   ) {}
-
-  ngOnInit() {}
 
   logout() {
     this.loginService.logout()
@@ -30,8 +28,6 @@ export class LoginDashboard implements OnInit, OnDestroy {
       this.handleError(e);
     });
   }
-
-  ngOnDestroy() {}    
 
   handleError(e: Error): void {
     console.error(e);

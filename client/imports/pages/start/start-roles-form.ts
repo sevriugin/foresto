@@ -23,7 +23,7 @@ export class StartRolesForm implements OnInit, OnDestroy {
   constructor() {}
 
   ngOnInit() {
-    this.usersSub = MeteorObservable.subscribe('usersOwnerPartnerClient').subscribe(() => {
+    this.usersSub = MeteorObservable.subscribe('users').subscribe(() => {
     
       MeteorObservable.autorun().subscribe(() => {
         this.usersOwner = Users.find({ 'profile.role': UserRole.OWNER }).fetch().slice(0, 3);

@@ -5,11 +5,11 @@ import { User, OfferSize } from 'both/models';
 import { Offers }          from 'both/collections';
 
 @Component({
-  selector: 'partner-addoffer-form',
-  templateUrl: './partner-addoffer-form.html'
+  selector: 'partner-offeradd-form',
+  templateUrl: './partner-offeradd-form.html'
 })
 @InjectUser('user')
-export class PartnerAddOfferForm implements OnInit, OnDestroy {
+export class PartnerOfferAddForm implements OnInit, OnDestroy {
   
   user: User;
 

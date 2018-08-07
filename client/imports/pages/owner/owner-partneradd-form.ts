@@ -4,10 +4,10 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Pattern } from 'both/models';
 
 @Component({
-  selector: 'owner-addpartner-form',
-  templateUrl: './owner-addpartner-form.html'
+  selector: 'owner-partneradd-form',
+  templateUrl: './owner-partneradd-form.html'
 })
-export class OwnerAddPartnerForm implements OnInit, OnDestroy {
+export class OwnerPartnerAddForm implements OnInit, OnDestroy {
   
   email: string;
   readonly emailPattern = Pattern.EMAIL;

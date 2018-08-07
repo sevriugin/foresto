@@ -42,7 +42,7 @@ export class StartPage implements OnInit, OnDestroy {
     }
 
     if (! this.user) {
-      this.usersSub = MeteorObservable.subscribe('usersOwnerPartnerClient').subscribe(() => {
+      this.usersSub = MeteorObservable.subscribe('users').subscribe(() => {
 
         const selectorOwner = { 'profile.role': UserRole.OWNER };
         const usersOwner = Users.collection.find(selectorOwner);
