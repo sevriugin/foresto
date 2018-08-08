@@ -26,7 +26,12 @@ export class PartnerClientAddForm implements OnInit, OnDestroy {
  
   addClient(phone: string): void {
     MeteorObservable.call('addClient', this.phone).subscribe((_id) => {
-      this.reset();
+      // create token for the new client
+      MeteorObservable.call('createToken', _id).subscribe(() => {
+        this.reset();
+      }, (error) => {
+        this.handleError(error);
+      });
     }, (error) => {
       this.handleError(error);
     });
