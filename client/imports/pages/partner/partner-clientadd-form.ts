@@ -10,6 +10,7 @@ import { Pattern, Mask_PHONE } from 'both/models';
 export class PartnerClientAddForm implements OnInit, OnDestroy {
   
   phone: string;
+  token: boolean;
   readonly phonePattern = Pattern.PHONE;
   //public phoneMask = ['+', '7', ' ', '(', /[1-9]/, /\d/, /\d/, ')', ' ', /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/];
   readonly phoneMask = Mask_PHONE;
@@ -27,11 +28,16 @@ export class PartnerClientAddForm implements OnInit, OnDestroy {
   addClient(phone: string): void {
     MeteorObservable.call('addClient', this.phone).subscribe((_id) => {
       // create token for the new client
-      MeteorObservable.call('createToken', _id).subscribe(() => {
+      if(this.token) {
+        MeteorObservable.call('createToken', _id).subscribe(() => {
+          this.reset();
+        }, (error) => {
+          this.handleError(error);
+        });
+      }
+      else {
         this.reset();
-      }, (error) => {
-        this.handleError(error);
-      });
+      }
     }, (error) => {
       this.handleError(error);
     });
