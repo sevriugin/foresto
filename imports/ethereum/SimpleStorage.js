@@ -11,6 +11,8 @@ class SimpleStorage {
         this.instance = undefined;
         this.data = undefined;    
         this.web3Provider = new HDWalletProvider(mnemonic, "http://localhost:8545");
+        this.address = this.web3Provider.addresses[0];
+        console.log(`Set provider with address: ${this.address}`);
         
         this.web3 = new Web3(this.web3Provider);
 
@@ -57,7 +59,22 @@ class SimpleStorage {
 
         this.instance.storedData.call()
             .then(result => that._setData(result))
-            .catch(error => concole.error(error));
+            .catch(error => console.error(error));
+    }
+    setData(data, cb) {
+        const that = this;
+        if(this.instance === undefined) {
+            this.contract.deployed().then(function(instance) {
+                instance.set(data, {from: that.address})
+                    .then(result => cb(result))
+                    .catch(error => console.error(error));
+            });
+        }
+        else {
+            this.instance.set(data, {from: that.address})
+                .then(result => cb(result))
+                .catch(error => console.error(error));
+        }
     }
 };
 

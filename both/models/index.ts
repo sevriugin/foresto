@@ -21,3 +21,4 @@ export const OfferSize = ['Большой', 'Средний'];
 export * from './user';
 export * from './offer';
 export * from './task';
+export * from './token';
