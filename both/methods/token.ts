@@ -5,6 +5,12 @@ import { UserRole } from '../models';
 
 import SimpleStorage from 'imports/ethereum/SimpleStorage';
 
+let simpleStorage;
+
+if (Meteor.isServer) {
+  simpleStorage = new SimpleStorage();
+}
+
 Meteor.methods({
   createToken: function (userId:string) {
     check(userId, String);
@@ -32,7 +38,6 @@ Meteor.methods({
       throw new Meteor.Error('403', 'No permissions!');
 
     if (Meteor.isServer) {
-      const simpleStorage = new SimpleStorage();
 
       simpleStorage.setData(10, (result) => {
         Tokens.collection.insert({
