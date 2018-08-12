@@ -1,3 +1,4 @@
-import './login-methods';
+import './methods-login';
+import './methods-token';
+
 import './tasks';
-import './token';

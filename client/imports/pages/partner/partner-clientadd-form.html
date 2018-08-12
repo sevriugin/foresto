@@ -1,15 +1,15 @@
-
-<div>
-  <b>добавить...</b>
-</div>
+<h5>добавить...</h5>
 <br>
 
 <input [(ngModel)]="phone" (keypress)="onInputKeypress($event)" placeholder="+7 (123) 456-7890" [textMask]="{mask: phoneMask}" #ngPhone="ngModel" pattern={{phonePattern}}/>
-<div>
-  <label for="token">выпускать токен</label>
-  <input type="checkbox" [(ngModel)]="token" id="token" name="token" #ngToken="ngModel" />
-  
-</div>
-<br>
+
+<table>
+  <tr>
+    <td align="right"><label>Выпустить токен:</label></td>
+    <td align="left"><input type="checkbox" [(ngModel)]="token"/></td>
+  </tr>
+</table>
+
 <div *ngIf="ngPhone.errors?.pattern"><br>Формат номера: +7 (123) 456-7890</div>
-<button (click)="addClient(phone)" [disabled]="!phone || !ngPhone.valid">Добавить</button>
+
+<button (click)="addClient()" [disabled]="!phone || !ngPhone.valid">Добавить</button>

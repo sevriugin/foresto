@@ -11,9 +11,9 @@ Tokens.allow({
   remove: byPartner
 });
 
-function byPartner(userId, offer) {
+function byPartner(userId, token) {
   const user = userId && Users.collection.findOne(userId);
   return user && user.profile 
     && user.profile.role == UserRole.PARTNER 
-    && offer._createdBy === userId;
+    && token._createdBy === userId;
 }

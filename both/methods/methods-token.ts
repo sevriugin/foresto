@@ -12,40 +12,41 @@ if (Meteor.isServer) {
 }
 
 Meteor.methods({
-  createToken: function (userId:string) {
-    check(userId, String);
+
+  createToken: function (clientId:string) {
+    check(clientId, String);
 
     const user = Users.collection.findOne(this.userId);
     const role = user && user.profile && user.profile.role;
-
     if (role !== UserRole.PARTNER)
       throw new Meteor.Error('405', 'Not authorized!');
  
-    const token = Tokens.collection.findOne( {user_id:userId} );
- 
+    const token = Tokens.collection.findOne({ user_id: clientId });
     if (token)
       throw new Meteor.Error('404', 'Token already created!');
 
-    const userClient = Users.collection.findOne(userId);
-
-    if (! userClient) 
+    const client = Users.collection.findOne(clientId);
+    if (! client) 
       throw new Meteor.Error('404', 'No such user!');
   
-    if (! userClient.profile || userClient.profile.role != UserRole.CLIENT)
+    if (! client.profile || client.profile.role != UserRole.CLIENT)
       throw new Meteor.Error('400', 'That user is not client...');
   
-    if (! userClient.profile || userClient.profile._createdBy != this.userId)
+    if (! client.profile || client.profile._createdBy != this.userId)
       throw new Meteor.Error('403', 'No permissions!');
 
     if (Meteor.isServer) {
 
       simpleStorage.setData(10, (result) => {
         Tokens.collection.insert({
+          user_id: clientId,
           issued: false,
-          user_id: userId,
-          activated: false
+          activated: false,
+          _createdBy: this.userId
         });
       }); 
+
     }
   }
+  
 });

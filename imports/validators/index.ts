@@ -1,1 +1,1 @@
-import './login';
+import './validator-login';

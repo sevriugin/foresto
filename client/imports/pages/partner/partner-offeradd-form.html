@@ -1,14 +1,11 @@
+<h5>добавить...</h5>
+<br>
 
-<div>
-  <b>добавить...</b>
-</div>
+<input [(ngModel)]="header" placeholder="Название"/>
+<br>
 <br>
 
 <table>
-  <tr>
-    <td align="right"><label>Название:</label></td>
-    <td align="left"><input [(ngModel)]="header" placeholder="Название"/></td>
-  </tr>
   <tr>
     <td align="right"><label>Действительно с:</label></td>
     <td align="left"><input [(ngModel)]="validFrom" type="date"/></td>
@@ -26,4 +23,5 @@
     </td>
   </tr>
 </table>
+
 <button (click)="addOffer()" [disabled]="! validFrom || ! expired || ! header || ! size">Добавить</button>

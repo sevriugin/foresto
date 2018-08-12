@@ -18,7 +18,8 @@ export const Mask_PHONE = ['+', '7', ' ', '(', /[1-9]/, /\d/, /\d/, ')', ' ', /\
 
 export const OfferSize = ['Большой', 'Средний'];
 
-export * from './user';
-export * from './offer';
+export * from './model-user';
+export * from './model-offer';
+export * from './model-token';
+
 export * from './task';
-export * from './token';

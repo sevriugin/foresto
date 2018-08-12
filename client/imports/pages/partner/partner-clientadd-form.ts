@@ -1,5 +1,5 @@
-import { MeteorObservable }             from 'meteor-rxjs';
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { MeteorObservable } from 'meteor-rxjs';
+import { Component }        from '@angular/core';
 
 import { Pattern, Mask_PHONE } from 'both/models';
 
@@ -7,33 +7,33 @@ import { Pattern, Mask_PHONE } from 'both/models';
   selector: 'partner-clientadd-form',
   templateUrl: './partner-clientadd-form.html'
 })
-export class PartnerClientAddForm implements OnInit, OnDestroy {
+export class PartnerClientAddForm {
   
   phone: string;
   token: boolean;
   readonly phonePattern = Pattern.PHONE;
-  //public phoneMask = ['+', '7', ' ', '(', /[1-9]/, /\d/, /\d/, ')', ' ', /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/];
   readonly phoneMask = Mask_PHONE;
 
   constructor() {}
 
-  ngOnInit() {}
-
   onInputKeypress({keyCode}: KeyboardEvent): void {
     if (keyCode === 13 && this.valid()) {
-      this.addClient(this.phone);
+      this.addClient();
     }
   }
  
-  addClient(phone: string): void {
+  addClient(): void {
     MeteorObservable.call('addClient', this.phone).subscribe((_id) => {
+
       // create token for the new client
       if(this.token) {
+
         MeteorObservable.call('createToken', _id).subscribe(() => {
           this.reset();
         }, (error) => {
           this.handleError(error);
         });
+
       }
       else {
         this.reset();
@@ -45,17 +45,16 @@ export class PartnerClientAddForm implements OnInit, OnDestroy {
  
   valid(): boolean {
     var result: boolean = 
-      !!this.phone && 
-      !!this.phone.match(this.phonePattern);
+      !! this.phone && 
+      !! this.phone.match(this.phonePattern);
 
     return result;
   }
 
   reset(): void {
     this.phone = '';
+    this.token = false;
   }
-
-  ngOnDestroy() {}
 
   handleError(e: Error): void {
     console.error(e);
