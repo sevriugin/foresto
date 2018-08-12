@@ -35,6 +35,10 @@ The project is designed to be a mobile application. It realizes insurance for cu
    * meteor add standard-minifier-css
    * meteor add standard-minifier-js
    * meteor add tracker
+   * meteor npm install --save web3 
+   * meteor npm install --save truffle
+   * meteor npm install --save truffle-contract 
+   * meteor npm install --save truffle-hdwallet-provider 
 4. Start meteor:
    * meteor
 5. Open: http://localhost:3000
