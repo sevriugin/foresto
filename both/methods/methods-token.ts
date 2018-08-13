@@ -3,12 +3,13 @@ import { check }  from 'meteor/check';
 import { Meteor } from 'meteor/meteor';
 import { UserRole } from '../models';
 
-import SimpleStorage from 'imports/ethereum/SimpleStorage';
+import TokenLoyalty from 'imports/ethereum/TokenLoyalty';
+const ownerAddress = "0x2952920b5813447f86D6c30Ad1e5C0975Fe563dd";
 
-let simpleStorage;
+let tokenLoyalty;
 
 if (Meteor.isServer) {
-  simpleStorage = new SimpleStorage();
+  tokenLoyalty = new TokenLoyalty();
 }
 
 Meteor.methods({
@@ -37,13 +38,24 @@ Meteor.methods({
 
     if (Meteor.isServer) {
 
-      simpleStorage.setData(10, (result) => {
+      tokenLoyalty.setWatch(Meteor.bindEnvironment((data) => {
+        tokenLoyalty.resetWatch();
+
         Tokens.collection.insert({
-          user_id: clientId,
-          issued: false,
+          owner_address: data.member,
+          nft_id: data.tokenId,
+          user_id: data.clientId,
+          issued: true,
           activated: false,
-          _createdBy: this.userId
+          _createdBy: this.userId,
+          value: 500,
+          tx: data.tx,
+          subPoolId: data.supPoolId
         });
+      }));
+
+      tokenLoyalty.setData({member:ownerAddress, clientId:clientId}, (result) => {
+        console.log(`methods-token: TX: ${result.tx}`);
       }); 
 
     }
