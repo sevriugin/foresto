@@ -1,0 +1,12 @@
+<header>
+  <h3>Детальная информация о токине</h3>
+</header>
+
+<header *ngFor="let token of tokens | async">
+  <p><b>Mongo ID:</b> {{tokenId}}</p>
+  <p><b>Token ID: </b> {{token.nft_id}}</p>
+  <p><b>Owner Address: </b>{{token.owner_address}}</p>
+  <p><b>Client ID: </b>{{token.user_id}}</p>
+  <p><b>TX: </b>{{token.tx}}</p>
+  <p><b>Sub Pool ID: </b>{{token.subPoolId}}</p>
+</header>

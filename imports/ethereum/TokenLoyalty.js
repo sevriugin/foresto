@@ -5,6 +5,8 @@ import HDWalletProvider from 'truffle-hdwallet-provider';
 import TokenLoyaltyArtifact from './build/contracts/TokenLoyalty.json';
 
 const mnemonic = "first mix any adult deal sand brand about window will casual second";
+const rinkeby = "https://rinkeby.infura.io/fyE6fpwJWFc6fBYSet1w";
+const localhost = "http://localhost:8545";
 
 export default class TokenLoyalty {
 
@@ -12,7 +14,7 @@ export default class TokenLoyalty {
 
     this.instance = undefined;
     this.data = undefined;    
-    this.web3Provider = new HDWalletProvider(mnemonic, "http://localhost:8545");
+    this.web3Provider = new HDWalletProvider(mnemonic, rinkeby);
     this.address = this.web3Provider.addresses[0];
     console.log(`Set provider with address: ${this.address}`);
     
@@ -36,8 +38,8 @@ export default class TokenLoyalty {
         }
         else {
           console.log(`Loyalty Token TX: ${responce.transactionHash}`);
-          console.log(`Loyalty Token ID ${responce.args.tokenId} is created. Sub Pool ID ${responce.args.supPoolId}. Address ${responce.args.member}. Client ID ${responce.args.clientId}`);
-          that._setData({ tx:responce.transactionHash, tokenId:responce.args.tokenId, supPoolId:responce.args.supPoolId, member:responce.args.member, clientId:responce.args.clientId });
+          console.log(`Loyalty Token ID ${responce.args.tokenId.toString()} is created. Sub Pool ID ${responce.args.supPoolId.toString()}. Address ${responce.args.member}. Client ID ${responce.args.clientId}`);
+          that._setData({ tx:responce.transactionHash, tokenId:responce.args.tokenId.toString(), supPoolId:responce.args.supPoolId.toString(), member:responce.args.member, clientId:responce.args.clientId });
         }
       });
     });
@@ -91,7 +93,7 @@ export default class TokenLoyalty {
 
         console.error("1-1");
 
-        instance.create(data.member, data.clientId, {from: that.address, gas:500000, gasPrice:"20"})
+        instance.create(data.member, data.clientId, {from: that.address, gas:500000, gasPrice:"20000000000"})
         .then(result => cb(result))
         .catch(error => console.error(error));
       })
@@ -100,7 +102,7 @@ export default class TokenLoyalty {
     else {
       console.error("1-2");
 
-      this.instance.create(data.member, data.clientId, {from: that.address, gas:500000, gasPrice:"20"})
+      this.instance.create(data.member, data.clientId, {from: that.address, gas:500000, gasPrice:"20000000000"})
         .then(result => cb(result))
         .catch(error => console.error(error));
     }

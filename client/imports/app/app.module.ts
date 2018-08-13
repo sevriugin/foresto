@@ -16,6 +16,7 @@ import { OWNER_PAGES }   from '../pages/owner';
 import { PARTNER_PAGES } from '../pages/partner';
 import { CLIENT_PAGES }  from '../pages/client';
 import { TASKS_PAGES }   from '../pages/tasks';
+import { TOKEN_PAGES }   from '../pages/token';
 
 @NgModule({
   imports: [
@@ -33,7 +34,8 @@ import { TASKS_PAGES }   from '../pages/tasks';
     OWNER_PAGES,
     PARTNER_PAGES,
     CLIENT_PAGES,
-    TASKS_PAGES
+    TASKS_PAGES,
+    TOKEN_PAGES
   ],
   providers: [
     ErrorHandler,

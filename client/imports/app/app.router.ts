@@ -6,6 +6,7 @@ import { OwnerRegisterPage, OwnerLoginPage, OwnerPage } from '../pages/owner';
 import { PartnerLoginPage, PartnerPage }                from '../pages/partner';
 import { ClientLoginPage, ClientPage }                  from '../pages/client';
 import { TasksPage, TaskDetails }                       from '../pages/tasks';
+import { TokenDetails }                                 from '../pages/token';
 
 export const routes: Routes = [
   { path: '', redirectTo: '/start', pathMatch: 'full' },
@@ -19,6 +20,7 @@ export const routes: Routes = [
   { path: 'client',             component: ClientPage },
   { path: 'tasks',              component: TasksPage },
   { path: 'task/:taskId',       component: TaskDetails },
+  { path: 'token/:tokenId',     component: TokenDetails },
   //{ path: 'task/:taskId', component: TaskDetails, canActivate: ['loggedIn'] },
 ];
   
