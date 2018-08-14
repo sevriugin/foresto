@@ -1,7 +1,7 @@
 import { check } from 'meteor/check';
 
-import { UserRole } from '../models';
-import { Users }    from '../collections';
+import { UserRole }      from '../models';
+import { Users, Tokens } from '../collections';
  
 Meteor.methods({
 
@@ -57,6 +57,10 @@ Meteor.methods({
     if (! client.profile || client.profile._createdBy != this.userId)
       throw new Meteor.Error('403', 'No permissions!');
 
+    const token = Tokens.collection.findOne( { 'user_id': clientId } );
+    if (token)
+      throw new Meteor.Error('406', 'That user has tokens...');
+  
     Meteor.users.remove(clientId);
   }
 

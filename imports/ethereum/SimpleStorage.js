@@ -78,9 +78,6 @@ export default class SimpleStorage {
 
       this.contract.deployed()
       .then(function(instance) {
-
-        console.error("1-1");
-
         instance.set(data, {from: that.address})
         .then(result => cb(result))
         .catch(error => console.error(error));
