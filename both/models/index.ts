@@ -21,5 +21,5 @@ export const OfferSize = ['Большой', 'Средний'];
 export * from './model-user';
 export * from './model-offer';
 export * from './model-token';
-
+export * from './model-subpool';
 export * from './task';

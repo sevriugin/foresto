@@ -7,8 +7,8 @@ import { InjectUser }                   from 'angular2-meteor-accounts-ui';
  
 import 'rxjs/add/operator/map';
 
-import { Tokens }      from 'both/collections';
-import { Token, User } from 'both/models';
+import { Tokens, Users }            from 'both/collections';
+import { Token, User, UserRole }    from 'both/models';
 
 @Component({
   templateUrl: './details.html'
@@ -17,6 +17,7 @@ import { Token, User } from 'both/models';
 export class TokenDetails implements OnInit , OnDestroy {
 
   user: User;
+  role: UserRole;
 
   paramsSub: Subscription;
 
@@ -25,6 +26,9 @@ export class TokenDetails implements OnInit , OnDestroy {
   tokens: Observable <Token[]>;
   tokenSub: Subscription;
   tokensSub: Subscription;
+
+  partner: boolean;
+  client: boolean;
   
   constructor(
     private route: ActivatedRoute
@@ -35,6 +39,17 @@ export class TokenDetails implements OnInit , OnDestroy {
       .map(params => params['tokenId'])
       .subscribe(tokenId => {
         this.tokenId = tokenId;
+        this.user = Users.findOne(Meteor.userId());
+        this.role = this.user && this.user.profile && this.user.profile.role;
+        if(this.role == UserRole.PARTNER) {
+          this.partner = true; this.client = false;
+        }
+        else if(this.role == UserRole.CLIENT) {
+          this.partner = false; this.client = true;
+        }
+        else {
+          this.partner = false; this.client = false;
+        }
 
         this.tokenSub = MeteorObservable.subscribe('token', this.tokenId).subscribe(() => {
           MeteorObservable.autorun().subscribe(() => {
@@ -46,6 +61,29 @@ export class TokenDetails implements OnInit , OnDestroy {
           this.tokens = Tokens.find( { _id: this.tokenId } );
         });
       });
+  }
+
+  activate(tokenId:string): void {
+
+    MeteorObservable.call('changeToken', tokenId).subscribe(() => {
+
+      MeteorObservable.call('activateToken', tokenId).subscribe(() => {
+        this.reset();
+      }, (error) => {
+        this.handleError(error);
+      });
+    }, (error) => {
+      this.handleError(error);
+    });
+  }
+
+  reset(): void {
+  }
+
+  handleError(e: Error): void {
+
+    console.error(e);
+    alert('Ошибка: ' + e.message);
   }
 
   ngOnDestroy() {
