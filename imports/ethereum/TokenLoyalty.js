@@ -85,6 +85,33 @@ export default class TokenLoyalty {
           });
         }
       });
+
+      instance.Funded()
+      .watch((err, responce) => {
+        if(err) {
+          console.error(err)
+        }
+        else {
+          console.log(`Loyalty SubPool TX: ${responce.transactionHash}`);
+          console.log(`Loyalty SubPool ID ${responce.args.subPoolId.toString()} is funded.`);
+
+          that.getSubPoolInfo(responce.args.subPoolId.toString(), (result) => {
+            const timestamp = moment.unix(result[0].toString()).format("MMMM Do YYYY, h:mm:ss a");
+            const closure = moment.unix(result[1].toString()).format("MMMM Do YYYY, h:mm:ss a");
+            const subPool = {
+              created:timestamp,
+              closed:closure,
+              numberOfMembers:result[2].toString(),
+              numberOfActivated:result[3].toString(),
+              debitValue:result[4].toString(),
+              paymentAmount:result[5].toString(),
+              value:result[6].toString()
+            };
+            that._setData({ event:responce.event ,tx:responce.transactionHash, supPoolId:responce.args.subPoolId.toString(), subPool:subPool});
+          });
+        }
+      });
+
     });
   }
 
@@ -206,4 +233,30 @@ export default class TokenLoyalty {
     }
   }
 
-};
+  fund(data, cb) {
+
+    const that = this;
+    console.log(`TokenLoyalty:fund data.fund:${data.subPoolId}`);
+    if(this.instance === undefined) {
+
+      this.contract.deployed()
+      .then(function(instance) {
+
+        console.error("4-1");
+
+        instance.fund(data.subPoolId, data.payment, data.debit, {from: that.address, value: data.value, gas:700000, gasPrice:"20000000000"})
+        .then(result => cb(result))
+        .catch(error => console.error(error));
+      })
+      .catch(error => console.error(error));
+    }
+    else {
+      console.error("4-2");
+
+      this.instance.fund(data.subPoolId, data.payment, data.debit, {from: that.address, value: data.value, gas:700000, gasPrice:"20000000000"})
+        .then(result => cb(result))
+        .catch(error => console.error(error));
+    }
+  }
+
+}

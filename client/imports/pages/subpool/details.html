@@ -1,0 +1,32 @@
+<header>
+  <h3>Детальная информация о саб-пуле</h3>
+</header>
+
+<header *ngFor="let subpool of subpools | async">
+  <p><b>Mongo ID:</b> {{subPoolId}}</p>
+  <p><b>SubPool ID: </b> {{subpool.subPoolId}}</p>
+  <p><b>Created: </b>{{subpool.created}}</p>
+  <p><b>Closed: </b>{{subpool.closed}}</p>
+  <p><b>Members #: </b>{{subpool.numberOfMembers}}</p>
+  <p><b>Activated #: </b>{{subpool.numberOfActivated}}</p>
+  <p><b>Debit: </b>{{subpool.debitValue}}</p>
+  <p><b>Payment: </b>{{subpool.paymentAmount}}</p>
+  <p><b>Value: </b>{{subpool.value}}</p>
+  
+</header>
+
+<table>
+  <tr>
+    <td align="right"><label>Payment :</label></td>
+    <td align="left"><input [(ngModel)]="payment" type="number"/></td>
+    </tr>
+  <tr>
+    <td align="right"><label>Debit:</label></td>
+    <td align="left"><input [(ngModel)]="debit" type="number"/></td>
+  </tr>
+  <tr>
+    <td align="right"><label>Value:</label></td>
+    <td align="left"><input [(ngModel)]="value" type="number"/></td>
+    </tr>
+</table>
+<button (click)="funding()" [hidden]="! owner" [disabled]="subpool.paymentAmount > 0 || ! payment || ! debit || ! value">Funding</button>

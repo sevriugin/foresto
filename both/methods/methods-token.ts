@@ -71,6 +71,16 @@ if (Meteor.isServer) {
         }})
       }
     }
+    else if(data.event === "Funded" && SubPools.collection.findOne({ subPoolId: data.supPoolId })) {
+      
+      SubPools.collection.update({ subPoolId: data.supPoolId },{ $set: {
+        closed: data.subPool.closed,
+        inprogress: false,
+        debitValue: data.subPool.debitValue,
+        paymentAmount: data.subPool.paymentAmount
+      }})
+    
+    }
     else {
       console.error(`methods-token: Can't process event ${data.event} `);
     }
@@ -144,10 +154,53 @@ Meteor.methods({
     const token = Tokens.collection.findOne({ nft_id: tokenId });
 
     if (!token)
-      throw new Meteor.Error('404', 'Token does not created!');
+      throw new Meteor.Error('404', 'Token is not created!');
     
     Tokens.collection.update({ nft_id: tokenId }, { $set: { inprogress:true } });
     
+  },
+
+  changeSubPool: function (subPoolId:string) {
+    check(subPoolId, String);
+
+    const user = Users.collection.findOne(this.userId);
+    const role = user && user.profile && user.profile.role;
+
+    if (role !== UserRole.OWNER)
+      throw new Meteor.Error('405', 'Not authorized!');
+ 
+    const subpool = SubPools.collection.findOne({ subPoolId: subPoolId });
+
+    if (!subpool)
+      throw new Meteor.Error('404', 'SubPool is not created!');
+    
+    SubPools.collection.update({ subPoolId: subPoolId }, { $set: { inprogress:true } });
+    
+  },
+
+  fundSubPool: function (subPoolId:string, payment:string, debit:string, value:string) {
+    check(subPoolId, String);
+    check(payment, String);
+    check(debit, String);
+    check(value, String);
+
+    const user = Users.collection.findOne(this.userId);
+    const role = user && user.profile && user.profile.role;
+
+    if (role !== UserRole.OWNER)
+      throw new Meteor.Error('405', 'Not authorized!');
+ 
+    const subpool = SubPools.collection.findOne({ subPoolId: subPoolId });
+
+    if (!subpool)
+      throw new Meteor.Error('404', 'SubPool is not created!');
+
+    if (Meteor.isServer) {
+      tokenLoyalty.fund({subPoolId: subPoolId, payment:payment, debit:debit, value:value}, (result) => {
+        console.log(`methods-token: activateToken TX: ${result.tx}`);
+      }); 
+    }
+
   }
   
 });

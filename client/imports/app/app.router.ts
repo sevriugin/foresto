@@ -7,6 +7,7 @@ import { PartnerLoginPage, PartnerPage }                from '../pages/partner';
 import { ClientLoginPage, ClientPage }                  from '../pages/client';
 import { TasksPage, TaskDetails }                       from '../pages/tasks';
 import { TokenDetails }                                 from '../pages/token';
+import { SubPoolDetails }                                 from '../pages/subpool';
 
 export const routes: Routes = [
   { path: '', redirectTo: '/start', pathMatch: 'full' },
@@ -21,6 +22,7 @@ export const routes: Routes = [
   { path: 'tasks',              component: TasksPage },
   { path: 'task/:taskId',       component: TaskDetails },
   { path: 'token/:tokenId',     component: TokenDetails },
+  { path: 'subpool/:subPoolId', component: SubPoolDetails },
   //{ path: 'task/:taskId', component: TaskDetails, canActivate: ['loggedIn'] },
 ];
   
