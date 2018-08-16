@@ -10,6 +10,7 @@ export interface Token extends Item {
   tx?: string;
   subPoolId?: string;
   inprogress?: boolean;
+  paid?:boolean;
 }
 
 export const TOKEN_PUBLIC = {
@@ -22,6 +23,7 @@ export const TOKEN_PUBLIC = {
   value: 1,
   tx: 1,
   subPoolId: 1,
-  inprogress: 1
+  inprogress: 1,
+  paid: 1
 };
 

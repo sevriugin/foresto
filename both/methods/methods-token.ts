@@ -81,6 +81,28 @@ if (Meteor.isServer) {
       }})
     
     }
+    else if(data.event === "Paid" && Tokens.collection.findOne({ nft_id: data.tokenId })) {
+      Tokens.collection.update({ nft_id: data.tokenId }, { $set: { paid:true, inprogress:false } });
+
+      if( ! SubPools.collection.findOne({ subPoolId: data.supPoolId }) ) {
+        SubPools.collection.insert({
+          subPoolId: data.supPoolId,
+          inprogress: false,
+          created: data.subPool.created,
+          closed: data.subPool.closed,
+          numberOfMembers: data.subPool.numberOfMembers,
+          numberOfActivated: data.subPool.numberOfActivated,
+          debitValue: data.subPool.debitValue,
+          paymentAmount: data.subPool.paymentAmount,
+          value: data.subPool.value
+        });
+      }
+      else {
+        SubPools.collection.update({ subPoolId: data.supPoolId },{ $set: {
+          value: data.subPool.value
+        }})
+      }
+    }
     else {
       console.error(`methods-token: Can't process event ${data.event} `);
     }
@@ -133,7 +155,7 @@ Meteor.methods({
     const token = Tokens.collection.findOne({ nft_id: tokenId });
 
     if (!token)
-      throw new Meteor.Error('404', 'Token does not created!');
+      throw new Meteor.Error('404', 'Token is not created!');
 
     if (Meteor.isServer) {
       tokenLoyalty.activate({tokenId:tokenId}, (result) => {
@@ -147,14 +169,16 @@ Meteor.methods({
 
     const user = Users.collection.findOne(this.userId);
     const role = user && user.profile && user.profile.role;
-
-    if (role !== UserRole.PARTNER)
-      throw new Meteor.Error('405', 'Not authorized!');
- 
     const token = Tokens.collection.findOne({ nft_id: tokenId });
 
     if (!token)
       throw new Meteor.Error('404', 'Token is not created!');
+
+    if (role === UserRole.CLIENT && token.user_id !== this.userId)
+      throw new Meteor.Error('405', 'CLIENT: Not authorized!');
+
+    if (role === UserRole.PARTNER && token._createdBy !== this.userId)
+      throw new Meteor.Error('405', 'PARTNER: Not authorized!');
     
     Tokens.collection.update({ nft_id: tokenId }, { $set: { inprogress:true } });
     
@@ -197,10 +221,31 @@ Meteor.methods({
 
     if (Meteor.isServer) {
       tokenLoyalty.fund({subPoolId: subPoolId, payment:payment, debit:debit, value:value}, (result) => {
-        console.log(`methods-token: activateToken TX: ${result.tx}`);
+        console.log(`methods-token: fundSubPool TX: ${result.tx}`);
       }); 
     }
 
-  }
+  },
+
+  payToken: function (tokenId:string) {
+    check(tokenId, String);
+
+    const user = Users.collection.findOne(this.userId);
+    const role = user && user.profile && user.profile.role;
+
+    if (role !== UserRole.CLIENT)
+      throw new Meteor.Error('405', 'Not authorized!');
+ 
+    const token = Tokens.collection.findOne({ nft_id: tokenId, user_id : this.userId });
+
+    if (!token)
+      throw new Meteor.Error('404', 'Token is not created or wrong user_id!');
+
+    if (Meteor.isServer) {
+      tokenLoyalty.payment({tokenId:tokenId, owner_address:ownerAddress}, (result) => {
+        console.log(`methods-token: payToken TX: ${result.tx}`);
+      }); 
+    }
+  },
   
 });

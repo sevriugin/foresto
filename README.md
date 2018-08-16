@@ -40,7 +40,7 @@ The project is designed to be a mobile application. It realizes insurance for cu
    * meteor npm install --save truffle-contract 
    * meteor npm install --save truffle-hdwallet-provider 
 4. Start meteor:
-   * meteor
+   * meteor -s settings.json -p 3001
 5. Open: http://localhost:3000
 
 Later

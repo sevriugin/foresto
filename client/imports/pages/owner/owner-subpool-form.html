@@ -11,7 +11,7 @@
       <li *ngFor="let subpool of subpools | async">
           <a [routerLink]="['/subpool', subpool._id]">
             <span class="badge"></span>
-            <span class="text">Sub Pool <b>{{subpool.subPoolId}}</b></span>
+            <span class="text">[{{subpool.subPoolId}}]</span>
           </a>
       </li>
     </ul>

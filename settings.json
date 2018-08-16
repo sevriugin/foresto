@@ -1,0 +1,9 @@
+{
+  "networks": {
+    "rinkeby": "https://rinkeby.infura.io/fyE6fpwJWFc6fBYSet1w",
+    "local": "http://localhost:8545"
+  },
+  "mnemonic": "first mix any adult deal sand brand about window will casual second"
+}
+
+

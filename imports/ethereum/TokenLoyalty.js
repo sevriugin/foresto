@@ -1,13 +1,10 @@
-import Web3             from 'web3';
-import contract         from 'truffle-contract';
-import HDWalletProvider from 'truffle-hdwallet-provider';
+import { Meteor }           from 'meteor/meteor';
+import Web3                 from 'web3';
+import contract             from 'truffle-contract';
+import HDWalletProvider     from 'truffle-hdwallet-provider';
 
 import TokenLoyaltyArtifact from './build/contracts/TokenLoyalty.json';
-import { moment } from 'meteor/momentjs:moment';
-
-const mnemonic = "first mix any adult deal sand brand about window will casual second";
-const rinkeby = "https://rinkeby.infura.io/fyE6fpwJWFc6fBYSet1w";
-const localhost = "http://localhost:8545";
+import { moment }           from 'meteor/momentjs:moment';
 
 export default class TokenLoyalty {
 
@@ -15,9 +12,10 @@ export default class TokenLoyalty {
 
     this.instance = undefined;
     this.data = undefined;    
-    this.web3Provider = new HDWalletProvider(mnemonic, rinkeby);
+    this.web3Provider = new HDWalletProvider(Meteor.settings.mnemonic, Meteor.settings.networks.rinkeby, 0, 2);
     this.address = this.web3Provider.addresses[0];
-    console.log(`Set provider with address: ${this.address}`);
+    this.tokenAddr = this.web3Provider.addresses[1];
+    console.log(`Set provider with contract owner: [${this.address}] and token owner: [${this.tokenAddr}]`);
     
     this.web3 = new Web3(this.web3Provider);
 
@@ -108,6 +106,32 @@ export default class TokenLoyalty {
               value:result[6].toString()
             };
             that._setData({ event:responce.event ,tx:responce.transactionHash, supPoolId:responce.args.subPoolId.toString(), subPool:subPool});
+          });
+        }
+      });
+      
+      instance.Paid()
+      .watch((err, responce) => {
+        if(err) {
+          console.error(err)
+        }
+        else {
+          console.log(`Loyalty Token TX: ${responce.transactionHash}`);
+          console.log(`Loyalty Token ID ${responce.args.tokenId.toString()} is paid.`);
+
+          that.getSubPoolInfo(responce.args.subPoolId.toString(), (result) => {
+            const timestamp = moment.unix(result[0].toString()).format("MMMM Do YYYY, h:mm:ss a");
+            const closure = moment.unix(result[1].toString()).format("MMMM Do YYYY, h:mm:ss a");
+            const subPool = {
+              created:timestamp,
+              closed:closure,
+              numberOfMembers:result[2].toString(),
+              numberOfActivated:result[3].toString(),
+              debitValue:result[4].toString(),
+              paymentAmount:result[5].toString(),
+              value:result[6].toString()
+            };
+            that._setData({ event:responce.event ,tx:responce.transactionHash, tokenId:responce.args.tokenId.toString(), supPoolId:responce.args.subPoolId.toString(), subPool:subPool});
           });
         }
       });
@@ -254,6 +278,33 @@ export default class TokenLoyalty {
       console.error("4-2");
 
       this.instance.fund(data.subPoolId, data.payment, data.debit, {from: that.address, value: data.value, gas:700000, gasPrice:"20000000000"})
+        .then(result => cb(result))
+        .catch(error => console.error(error));
+    }
+  }
+
+  payment(data, cb) {
+
+    const that = this;
+    console.log(`TokenLoyalty:payment data.tokenId:${data.tokenId}`);
+
+    if(this.instance === undefined) {
+
+      this.contract.deployed()
+      .then(function(instance) {
+
+        console.error("5-1");
+
+        instance.payment(data.tokenId, {from: this.tokenAddr, gas:700000, gasPrice:"20000000000"})
+        .then(result => cb(result))
+        .catch(error => console.error(error));
+      })
+      .catch(error => console.error(error));
+    }
+    else {
+      console.error("5-2");
+
+      this.instance.payment(data.tokenId, {from: this.tokenAddr, gas:700000, gasPrice:"20000000000"})
         .then(result => cb(result))
         .catch(error => console.error(error));
     }

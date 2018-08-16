@@ -77,6 +77,20 @@ export class TokenDetails implements OnInit , OnDestroy {
     });
   }
 
+  pay(tokenId:string): void {
+
+    MeteorObservable.call('changeToken', tokenId).subscribe(() => {
+
+      MeteorObservable.call('payToken', tokenId).subscribe(() => {
+        this.reset();
+      }, (error) => {
+        this.handleError(error);
+      });
+    }, (error) => {
+      this.handleError(error);
+    });
+  }
+
   reset(): void {
   }
 

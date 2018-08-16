@@ -10,6 +10,8 @@
   <p><b>TX: </b><a href="https://rinkeby.etherscan.io/tx/{{token.tx}}">{{token.tx}}</a></p>
   <p><b>Sub Pool ID: </b>{{token.subPoolId}}</p>
   <p><b>Activated: </b>{{token.activated}}</p>
+  <p [hidden]="! token.paid"><b>PAID</b></p>
+  <p [hidden]="! token.inprogress"><b>wait for the blockchain transaction confirmation...</b></p>
   <button (click)="activate(token.nft_id)" [hidden]="! partner" [disabled]="token.activated || token.inprogress">Activate</button>
-  <button [hidden]="! client" [disabled]="! token.activated || token.inprogress">Payment</button>
+  <button (click)="pay(token.nft_id)" [hidden]="! client" [disabled]="token.paid || token.inprogress || ! token.activated ">Payment</button>
 </header>
