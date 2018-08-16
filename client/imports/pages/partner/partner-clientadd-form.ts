@@ -23,12 +23,12 @@ export class PartnerClientAddForm {
   }
  
   addClient(): void {
-    MeteorObservable.call('addClient', this.phone).subscribe((_id) => {
+    MeteorObservable.call('addClient', this.phone).subscribe((clientId) => {
 
       // create token for the new client
       if(this.token) {
 
-        MeteorObservable.call('createToken', _id).subscribe(() => {
+        MeteorObservable.call('createToken', clientId).subscribe(() => {
           this.reset();
         }, (error) => {
           this.handleError(error);
