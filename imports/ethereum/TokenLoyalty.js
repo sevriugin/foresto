@@ -190,7 +190,7 @@ export default class TokenLoyalty {
 
         console.error("1-1");
 
-        instance.create(data.member, data.clientId, {from: that.address, gas:500000, gasPrice:"20000000000"})
+        instance.create(data.member, data.clientId, {from: that.address, gas:900000, gasPrice:"20000000000"})
         .then(result => cb(result))
         .catch(error => console.error(error));
       })
@@ -199,7 +199,7 @@ export default class TokenLoyalty {
     else {
       console.error("1-2");
 
-      this.instance.create(data.member, data.clientId, {from: that.address, gas:500000, gasPrice:"20000000000"})
+      this.instance.create(data.member, data.clientId, {from: that.address, gas:900000, gasPrice:"20000000000"})
         .then(result => cb(result))
         .catch(error => console.error(error));
     }
@@ -216,7 +216,7 @@ export default class TokenLoyalty {
 
         console.error("2-1");
 
-        instance.activate(data.tokenId, {from: that.address, gas:500000, gasPrice:"20000000000"})
+        instance.activate(data.tokenId, {from: that.address, gas:700000, gasPrice:"20000000000"})
         .then(result => cb(result))
         .catch(error => console.error(error));
       })
@@ -225,7 +225,7 @@ export default class TokenLoyalty {
     else {
       console.error("2-2");
 
-      this.instance.activate(data.tokenId, {from: that.address, gas:500000, gasPrice:"20000000000"})
+      this.instance.activate(data.tokenId, {from: that.address, gas:700000, gasPrice:"20000000000"})
         .then(result => cb(result))
         .catch(error => console.error(error));
     }
