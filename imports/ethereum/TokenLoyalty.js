@@ -184,12 +184,8 @@ export default class TokenLoyalty {
     this.partner = data.partner;
 
     if(this.instance === undefined) {
-
       this.contract.deployed()
       .then(function(instance) {
-
-        console.error("1-1");
-
         instance.create(data.member, data.clientId, {from: that.address, gas:900000, gasPrice:"20000000000"})
         .then(result => cb(result))
         .catch(error => console.error(error));
@@ -197,8 +193,6 @@ export default class TokenLoyalty {
       .catch(error => console.error(error));
     }
     else {
-      console.error("1-2");
-
       this.instance.create(data.member, data.clientId, {from: that.address, gas:900000, gasPrice:"20000000000"})
         .then(result => cb(result))
         .catch(error => console.error(error));

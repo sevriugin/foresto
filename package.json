@@ -57,6 +57,7 @@
     "testModule": "tests/main.ts"
   },
   "devDependencies": {
+    "@machinomy/types-truffle-hdwallet-provider": "git+https://github.com/machinomy/types-truffle-hdwallet-provider.git",
     "@types/meteor": "^1.4.16",
     "@types/meteor-accounts-phone": "0.0.5",
     "@types/underscore": "^1.8.8",

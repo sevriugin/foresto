@@ -1,0 +1,154 @@
+[[[[[ C:\Work\Папино\Workspaces\Renaissance\Meteor-Server ]]]]]
+
+=> Started proxy.
+=> A patch (Meteor 1.7.0.4) for your current release is available!
+   Update this project now with 'meteor update --patch'.
+[client]: Collecting TypeScript source files: 12.770ms
+[client]: TypeScript Files Compilation: 13.410ms
+[client]: HTML Files Compilation: 19.273ms
+[client]: SCSS Files Compilation: 4.813ms
+[client]: Collecting TypeScript source files: 7.104ms
+[client]: TypeScript Files Compilation: 11.759ms
+[client]: HTML Files Compilation: 13.324ms
+[client]: SCSS Files Compilation: 4.583ms
+[server]: Collecting TypeScript source files: 12.786ms
+[server]: TypeScript Files Compilation: 4.828ms
+[server]: HTML Files Compilation: 0.052ms
+=> Started MongoDB.
+[94mI20180816-00:42:08.914(3)? [39mSet provider with address: 0xd601682a7584a7541c639899454d201fe3270e9c
+=> Started your app.
+
+=> App running at: http://localhost:3000/
+   Type Control-C twice to stop.
+
+[94mI20180816-00:42:08.974(3)? [39mTokenLoyalty: instance is ready
+[94mI20180816-00:42:55.938(3)? [39mTokenLoyalty:setData data.member:0x2952920b5813447f86D6c30Ad1e5C0975Fe563dd data.clientId:JwQ4F3SmehNgjvCKS from:0xd601682a7584a7541c639899454d201fe3270e9c
+[94mW20180816-00:42:55.939(3)? (STDERR) [39m[95m1-2[39m
+[94mW20180816-00:43:16.917(3)? (STDERR) [39m[95m{ Error: Transaction: 0x969fa05e94013bed1a0d67008d56207ada99debdce68912e699aed7411da4196 exited with an error (status 0).[39m
+[94mW20180816-00:43:16.919(3)? (STDERR) [39m[95mPlease check that the transaction:[39m
+[94mW20180816-00:43:16.920(3)? (STDERR) [39m[95m    - satisfies all conditions set by Solidity `require` statements.[39m
+[94mW20180816-00:43:16.920(3)? (STDERR) [39m[95m    - does not trigger a Solidity `revert` statement.[39m
+[94mW20180816-00:43:16.921(3)? (STDERR) [39m[95m[39m
+[94mW20180816-00:43:16.922(3)? (STDERR) [39m[95m    at StatusError.ExtendableError (C:\Work\Папино\Workspaces\Renaissance\Meteor-Server\node_modules\truffle-error\index.js:10:17)[39m
+[94mW20180816-00:43:16.922(3)? (STDERR) [39m[95m    at new StatusError (C:\Work\Папино\Workspaces\Renaissance\Meteor-Server\node_modules\truffle-contract\statuserror.js:29:22)[39m
+[94mW20180816-00:43:16.923(3)? (STDERR) [39m[95m    at Object.callback (C:\Work\Папино\Workspaces\Renaissance\Meteor-Server\node_modules\truffle-contract\contract.js:181:41)[39m
+[94mW20180816-00:43:16.923(3)? (STDERR) [39m[95m    at C:\Work\Папино\Workspaces\Renaissance\Meteor-Server\node_modules\truffle-contract\node_modules\web3\lib\web3\method.js:142:25[39m
+[94mW20180816-00:43:16.924(3)? (STDERR) [39m[95m    at C:\Work\Папино\Workspaces\Renaissance\Meteor-Server\node_modules\truffle-contract\node_modules\web3\lib\web3\requestmanager.js:89:9[39m
+[94mW20180816-00:43:16.924(3)? (STDERR) [39m[95m    at C:\Work\Папино\Workspaces\Renaissance\Meteor-Server\node_modules\web3-provider-engine\index.js:152:9[39m
+[94mW20180816-00:43:16.925(3)? (STDERR) [39m[95m    at C:\Work\Папино\Workspaces\Renaissance\Meteor-Server\node_modules\async\internal\once.js:12:16[39m
+[94mW20180816-00:43:16.925(3)? (STDERR) [39m[95m    at replenish (C:\Work\Папино\Workspaces\Renaissance\Meteor-Server\node_modules\async\internal\eachOfLimit.js:61:25)[39m
+[94mW20180816-00:43:16.926(3)? (STDERR) [39m[95m    at C:\Work\Папино\Workspaces\Renaissance\Meteor-Server\node_modules\async\internal\eachOfLimit.js:71:9[39m
+[94mW20180816-00:43:16.926(3)? (STDERR) [39m[95m    at eachLimit (C:\Work\Папино\Workspaces\Renaissance\Meteor-Server\node_modules\async\eachLimit.js:43:36)[39m
+[94mW20180816-00:43:16.927(3)? (STDERR) [39m[95m    at C:\Work\Папино\Workspaces\Renaissance\Meteor-Server\node_modules\async\internal\doLimit.js:9:16[39m
+[94mW20180816-00:43:16.927(3)? (STDERR) [39m[95m    at end (C:\Work\Папино\Workspaces\Renaissance\Meteor-Server\node_modules\web3-provider-engine\index.js:127:5)[39m
+[94mW20180816-00:43:16.928(3)? (STDERR) [39m[95m    at C:\Work\Папино\Workspaces\Renaissance\Meteor-Server\node_modules\web3-provider-engine\subproviders\provider.js:20:5[39m
+[94mW20180816-00:43:16.928(3)? (STDERR) [39m[95m    at XMLHttpRequest.request.onreadystatechange (C:\Work\Папино\Workspaces\Renaissance\Meteor-Server\node_modules\truffle-hdwallet-provider\node_modules\web3\lib\web3\httpprovider.js:118:13)[39m
+[94mW20180816-00:43:16.929(3)? (STDERR) [39m[95m    at XMLHttpRequestEventTarget.dispatchEvent (C:\Work\Папино\Workspaces\Renaissance\Meteor-Server\node_modules\xhr2\lib\xhr2.js:64:18)[39m
+[94mW20180816-00:43:16.929(3)? (STDERR) [39m[95m    at XMLHttpRequest._setReadyState (C:\Work\Папино\Workspaces\Renaissance\Meteor-Server\node_modules\xhr2\lib\xhr2.js:354:12)[39m
+[94mW20180816-00:43:16.930(3)? (STDERR) [39m[95m    at XMLHttpRequest._onHttpResponseEnd (C:\Work\Папино\Workspaces\Renaissance\Meteor-Server\node_modules\xhr2\lib\xhr2.js:509:12)[39m
+[94mW20180816-00:43:16.930(3)? (STDERR) [39m[95m    at IncomingMessage.<anonymous> (C:\Work\Папино\Workspaces\Renaissance\Meteor-Server\node_modules\xhr2\lib\xhr2.js:469:24)[39m
+[94mW20180816-00:43:16.931(3)? (STDERR) [39m[95m    at emitNone (events.js:111:20)[39m
+[94mW20180816-00:43:16.931(3)? (STDERR) [39m[95m    at IncomingMessage.emit (events.js:208:7)[39m
+[94mW20180816-00:43:16.932(3)? (STDERR) [39m[95m    at endReadableNT (_stream_readable.js:1064:12)[39m
+[94mW20180816-00:43:16.932(3)? (STDERR) [39m[95m    at _combinedTickCallback (internal/process/next_tick.js:138:11)[39m
+[94mW20180816-00:43:16.933(3)? (STDERR) [39m[95m    at process._tickDomainCallback (internal/process/next_tick.js:218:9)[39m
+[94mW20180816-00:43:16.933(3)? (STDERR) [39m[95m  message: 'Transaction: 0x969fa05e94013bed1a0d67008d56207ada99debdce68912e699aed7411da4196 exited with an error (status 0).\nPlease check that the transaction:\n    - satisfies all conditions set by Solidity `require` statements.\n    - does not trigger a Solidity `revert` statement.\n',[39m
+[94mW20180816-00:43:16.934(3)? (STDERR) [39m[95m  stack: 'Error: Transaction: 0x969fa05e94013bed1a0d67008d56207ada99debdce68912e699aed7411da4196 exited with an error (status 0).\nPlease check that the transaction:\n    - satisfies all conditions set by Solidity `require` statements.\n    - does not trigger a Solidity `revert` statement.\n\n    at StatusError.ExtendableError (C:\\Work\\Папино\\Workspaces\\Renaissance\\Meteor-Server\\node_modules\\truffle-error\\index.js:10:17)\n    at new StatusError (C:\\Work\\Папино\\Workspaces\\Renaissance\\Meteor-Server\\node_modules\\truffle-contract\\statuserror.js:29:22)\n    at Object.callback (C:\\Work\\Папино\\Workspaces\\Renaissance\\Meteor-Server\\node_modules\\truffle-contract\\contract.js:181:41)\n    at C:\\Work\\Папино\\Workspaces\\Renaissance\\Meteor-Server\\node_modules\\truffle-contract\\node_modules\\web3\\lib\\web3\\method.js:142:25\n    at C:\\Work\\Папино\\Workspaces\\Renaissance\\Meteor-Server\\node_modules\\truffle-contract\\node_modules\\web3\\lib\\web3\\requestmanager.js:89:9\n    at C:\\Work\\Папино\\Workspaces\\Renaissance\\Meteor-Server\\node_modules\\web3-provider-engine\\index.js:152:9\n    at C:\\Work\\Папино\\Workspaces\\Renaissance\\Meteor-Server\\node_modules\\async\\internal\\once.js:12:16\n    at replenish (C:\\Work\\Папино\\Workspaces\\Renaissance\\Meteor-Server\\node_modules\\async\\internal\\eachOfLimit.js:61:25)\n    at C:\\Work\\Папино\\Workspaces\\Renaissance\\Meteor-Server\\node_modules\\async\\internal\\eachOfLimit.js:71:9\n    at eachLimit (C:\\Work\\Папино\\Workspaces\\Renaissance\\Meteor-Server\\node_modules\\async\\eachLimit.js:43:36)\n    at C:\\Work\\Папино\\Workspaces\\Renaissance\\Meteor-Server\\node_modules\\async\\internal\\doLimit.js:9:16\n    at end (C:\\Work\\Папино\\Workspaces\\Renaissance\\Meteor-Server\\node_modules\\web3-provider-engine\\index.js:127:5)\n    at C:\\Work\\Папино\\Workspaces\\Renaissance\\Meteor-Server\\node_modules\\web3-provider-engine\\subproviders\\provider.js:20:5\n    at XMLHttpRequest.request.onreadystatechange (C:\\Work\\Папино\\Workspaces\\Renaissance\\Meteor-Server\\node_modules\\truffle-hdwallet-provider\\node_modules\\web3\\lib\\web3\\httpprovider.js:118:13)\n    at XMLHttpRequestEventTarget.dispatchEvent (C:\\Work\\Папино\\Workspaces\\Renaissance\\Meteor-Server\\node_modules\\xhr2\\lib\\xhr2.js:64:18)\n    at XMLHttpRequest._setReadyState (C:\\Work\\Папино\\Workspaces\\Renaissance\\Meteor-Server\\node_modules\\xhr2\\lib\\xhr2.js:354:12)\n    at XMLHttpRequest._onHttpResponseEnd (C:\\Work\\Папино\\Workspaces\\Renaissance\\Meteor-Server\\node_modules\\xhr2\\lib\\xhr2.js:509:12)\n    at IncomingMessage.<anonymous> (C:\\Work\\Папино\\Workspaces\\Renaissance\\Meteor-Server\\node_modules\\xhr2\\lib\\xhr2.js:469:24)\n    at emitNone (events.js:111:20)\n    at IncomingMessage.emit (events.js:208:7)\n    at endReadableNT (_stream_readable.js:1064:12)\n    at _combinedTickCallback (internal/process/next_tick.js:138:11)\n    at process._tickDomainCallback (internal/process/next_tick.js:218:9)',[39m
+[94mW20180816-00:43:16.935(3)? (STDERR) [39m[95m  name: 'StatusError',[39m
+[94mW20180816-00:43:16.935(3)? (STDERR) [39m[95m  tx: '0x969fa05e94013bed1a0d67008d56207ada99debdce68912e699aed7411da4196',[39m
+[94mW20180816-00:43:16.936(3)? (STDERR) [39m[95m  receipt: [39m
+[94mW20180816-00:43:16.936(3)? (STDERR) [39m[95m   { blockHash: '0xfd2f080c9b1ba9788b5e21069a47ccaefe331d3a56737ddc239d2405cfad2b3d',[39m
+[94mW20180816-00:43:16.937(3)? (STDERR) [39m[95m     blockNumber: 2819953,[39m
+[94mW20180816-00:43:16.937(3)? (STDERR) [39m[95m     contractAddress: null,[39m
+[94mW20180816-00:43:16.938(3)? (STDERR) [39m[95m     cumulativeGasUsed: 498028,[39m
+[94mW20180816-00:43:16.938(3)? (STDERR) [39m[95m     from: '0xd601682a7584a7541c639899454d201fe3270e9c',[39m
+[94mW20180816-00:43:16.939(3)? (STDERR) [39m[95m     gasUsed: 498028,[39m
+[94mW20180816-00:43:16.939(3)? (STDERR) [39m[95m     logs: [],[39m
+[94mW20180816-00:43:16.940(3)? (STDERR) [39m[95m     logsBloom: '0x00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000',[39m
+[94mW20180816-00:43:16.940(3)? (STDERR) [39m[95m     status: '0x0',[39m
+[94mW20180816-00:43:16.941(3)? (STDERR) [39m[95m     to: '0xc052bc0c5a06e0dfa1e37659be67d134241d5e74',[39m
+[94mW20180816-00:43:16.941(3)? (STDERR) [39m[95m     transactionHash: '0x969fa05e94013bed1a0d67008d56207ada99debdce68912e699aed7411da4196',[39m
+[94mW20180816-00:43:16.942(3)? (STDERR) [39m[95m     transactionIndex: 0 } }[39m
+�������젢믮������ ����⭮�� 䠩�� [Y(��)/N(���)]? 
+
+
+
+I20180816-01:00:21.286(3)? TokenLoyalty: instance is ready
+I20180816-01:16:36.350(3)? TokenLoyalty:setData data.member:0x2952920b5813447f86D6c30Ad1e5C0975Fe563dd data.clientId:aSxrKJq42g4EHZxaq from:0xd601682a7584a7541c639899454d201fe3270e9c
+W20180816-01:16:54.487(3)? (STDERR) { Error: Transaction: 0xff59fb37ba42bd3447e5809c5f3c0c8f227f7ed3e4c029f1a37e3d814c0c45d7 exited with an error (status 0).
+W20180816-01:16:54.493(3)? (STDERR) Please check that the transaction:
+W20180816-01:16:54.495(3)? (STDERR)     - satisfies all conditions set by Solidity `require` statements.
+W20180816-01:16:54.498(3)? (STDERR)     - does not trigger a Solidity `revert` statement.
+W20180816-01:16:54.501(3)? (STDERR)
+W20180816-01:16:54.503(3)? (STDERR)     at StatusError.ExtendableError (c:\Work\Папино\Workspaces\Renaissance\Meteor-Server\node_modules\truffle-error\index.js:10:17)
+W20180816-01:16:54.506(3)? (STDERR)     at new StatusError (c:\Work\Папино\Workspaces\Renaissance\Meteor-Server\node_modules\truffle-contract\statuserror.js:29:22)
+W20180816-01:16:54.510(3)? (STDERR)     at Object.callback (c:\Work\Папино\Workspaces\Renaissance\Meteor-Server\node_modules\truffle-contract\contract.js:181:41)
+W20180816-01:16:54.513(3)? (STDERR)     at c:\Work\Папино\Workspaces\Renaissance\Meteor-Server\node_modules\truffle-contract\node_modules\web3\lib\web3\method.js:142:25
+W20180816-01:16:54.516(3)? (STDERR)     at c:\Work\Папино\Workspaces\Renaissance\Meteor-Server\node_modules\truffle-contract\node_modules\web3\lib\web3\requestmanager.js:89:9
+W20180816-01:16:54.519(3)? (STDERR)     at c:\Work\Папино\Workspaces\Renaissance\Meteor-Server\node_modules\web3-provider-engine\index.js:152:9
+W20180816-01:16:54.522(3)? (STDERR)     at c:\Work\Папино\Workspaces\Renaissance\Meteor-Server\node_modules\async\internal\once.js:12:16
+W20180816-01:16:54.524(3)? (STDERR)     at replenish (c:\Work\Папино\Workspaces\Renaissance\Meteor-Server\node_modules\async\internal\eachOfLimit.js:61:25)
+W20180816-01:16:54.526(3)? (STDERR)     at c:\Work\Папино\Workspaces\Renaissance\Meteor-Server\node_modules\async\internal\eachOfLimit.js:71:9
+W20180816-01:16:54.528(3)? (STDERR)     at eachLimit (c:\Work\Папино\Workspaces\Renaissance\Meteor-Server\node_modules\async\eachLimit.js:43:36)
+W20180816-01:16:54.529(3)? (STDERR)     at c:\Work\Папино\Workspaces\Renaissance\Meteor-Server\node_modules\async\internal\doLimit.js:9:16
+W20180816-01:16:54.531(3)? (STDERR)     at end (c:\Work\Папино\Workspaces\Renaissance\Meteor-Server\node_modules\web3-provider-engine\index.js:127:5)
+W20180816-01:16:54.533(3)? (STDERR)     at c:\Work\Папино\Workspaces\Renaissance\Meteor-Server\node_modules\web3-provider-engine\subproviders\provider.js:20:5
+W20180816-01:16:54.535(3)? (STDERR)     at XMLHttpRequest.request.onreadystatechange (c:\Work\Папино\Workspaces\Renaissance\Meteor-Server\node_modules\truffle-hdwallet-provider\node_modules\web3\lib\web3\httpprovider.js:118:13)
+W20180816-01:16:54.537(3)? (STDERR)     at XMLHttpRequestEventTarget.dispatchEvent (c:\Work\Папино\Workspaces\Renaissance\Meteor-Server\node_modules\xhr2\lib\xhr2.js:64:18)
+W20180816-01:16:54.538(3)? (STDERR)     at XMLHttpRequest._setReadyState (c:\Work\Папино\Workspaces\Renaissance\Meteor-Server\node_modules\xhr2\lib\xhr2.js:354:12)
+W20180816-01:16:54.540(3)? (STDERR)     at XMLHttpRequest._onHttpResponseEnd (c:\Work\Папино\Workspaces\Renaissance\Meteor-Server\node_modules\xhr2\lib\xhr2.js:509:12)
+W20180816-01:16:54.542(3)? (STDERR)     at IncomingMessage.<anonymous> (c:\Work\Папино\Workspaces\Renaissance\Meteor-Server\node_modules\xhr2\lib\xhr2.js:469:24)
+W20180816-01:16:54.544(3)? (STDERR)     at emitNone (events.js:111:20)
+W20180816-01:16:54.545(3)? (STDERR)     at IncomingMessage.emit (events.js:208:7)
+W20180816-01:16:54.547(3)? (STDERR)     at endReadableNT (_stream_readable.js:1064:12)
+W20180816-01:16:54.548(3)? (STDERR)     at _combinedTickCallback (internal/process/next_tick.js:138:11)
+W20180816-01:16:54.550(3)? (STDERR)     at process._tickDomainCallback (internal/process/next_tick.js:218:9)
+
+W20180816-01:16:54.552(3)? (STDERR)   message: 'Transaction: 0xff59fb37ba42bd3447e5809c5f3c0c8f227f7ed3e4c029f1a37e3d814c0c45d7 exited with an error (status 0).
+\nPlease check that the transaction:
+\n    - satisfies all conditions set by Solidity `require` statements.
+\n    - does not trigger a Solidity `revert` statement.
+\n',W20180816-01:16:54.553(3)? (STDERR)   stack: 'Error: Transaction: 0xff59fb37ba42bd3447e5809c5f3c0c8f227f7ed3e4c029f1a37e3d814c0c45d7 exited with an error (status 0).
+\nPlease check that the transaction:
+\n    - satisfies all conditions set by Solidity `require` statements.
+\n    - does not trigger a Solidity `revert` statement.
+\n
+\n    at StatusError.ExtendableError (c:\\Work\\Папино\\Workspaces\\Renaissance\\Meteor-Server\\node_modules\\truffle-error\\index.js:10:17)
+\n    at new StatusError (c:\\Work\\Папино\\Workspaces\\Renaissance\\Meteor-Server\\node_modules\\truffle-contract\\statuserror.js:29:22)
+\n    at Object.callback (c:\\Work\\Папино\\Workspaces\\Renaissance\\Meteor-Server\\node_modules\\truffle-contract\\contract.js:181:41)
+\n    at c:\\Work\\Папино\\Workspaces\\Renaissance\\Meteor-Server\\node_modules\\truffle-contract\\node_modules\\web3\\lib\\web3\\method.js:142:25
+\n    at c:\\Work\\Папино\\Workspaces\\Renaissance\\Meteor-Server\\node_modules\\truffle-contract\\node_modules\\web3\\lib\\web3\\requestmanager.js:89:9
+\n    at c:\\Work\\Папино\\Workspaces\\Renaissance\\Meteor-Server\\node_modules\\web3-provider-engine\\index.js:152:9
+\n    at c:\\Work\\Папино\\Workspaces\\Renaissance\\Meteor-Server\\node_modules\\async\\internal\\once.js:12:16
+\n    at replenish (c:\\Work\\Папино\\Workspaces\\Renaissance\\Meteor-Server\\node_modules\\async\\internal\\eachOfLimit.js:61:25)
+\n    at c:\\Work\\Папино\\Workspaces\\Renaissance\\Meteor-Server\\node_modules\\async\\internal\\eachOfLimit.js:71:9
+\n    at eachLimit (c:\\Work\\Папино\\Workspaces\\Renaissance\\Meteor-Server\\node_modules\\async\\eachLimit.js:43:36)
+\n    at c:\\Work\\Папино\\Workspaces\\Renaissance\\Meteor-Server\\node_modules\\async\\internal\\doLimit.js:9:16
+\n    at end (c:\\Work\\Папино\\Workspaces\\Renaissance\\Meteor-Server\\node_modules\\web3-provider-engine\\index.js:127:5)
+\n    at c:\\Work\\Папино\\Workspaces\\Renaissance\\Meteor-Server\\node_modules\\web3-provider-engine\\subproviders\\provider.js:20:5
+\n    at XMLHttpRequest.request.onreadystatechange (c:\\Work\\Папино\\Workspaces\\Renaissance\\Meteor-Server\\node_modules\\truffle-hdwallet-provider\\node_modules\\web3\\lib\\web3\\httpprovider.js:118:13)
+\n    at XMLHttpRequestEventTarget.dispatchEvent (c:\\Work\\Папино\\Workspaces\\Renaissance\\Meteor-Server\\node_modules\\xhr2\\lib\\xhr2.js:64:18)
+\n    at XMLHttpRequest._setReadyState (c:\\Work\\Папино\\Workspaces\\Renaissance\\Meteor-Server\\node_modules\\xhr2\\lib\\xhr2.js:354:12)
+\n    at XMLHttpRequest._onHttpResponseEnd (c:\\Work\\Папино\\Workspaces\\Renaissance\\Meteor-Server\\node_modules\\xhr2\\lib\\xhr2.js:509:12)
+\n    at IncomingMessage.<anonymous> (c:\\Work\\Папино\\Workspaces\\Renaissance\\Meteor-Server\\node_modules\\xhr2\\lib\\xhr2.js:469:24)
+\n    at emitNone (events.js:111:20)
+\n    at IncomingMessage.emit (events.js:208:7)
+\n    at endReadableNT (_stream_readable.js:1064:12)
+\n    at _combinedTickCallback (internal/process/next_tick.js:138:11)
+\n    at process._tickDomainCallback (internal/process/next_tick.js:218:9)',
+
+W20180816-01:16:54.558(3)? (STDERR)   name: 'StatusError',
+W20180816-01:16:54.560(3)? (STDERR)   tx: '0xff59fb37ba42bd3447e5809c5f3c0c8f227f7ed3e4c029f1a37e3d814c0c45d7',
+W20180816-01:16:54.561(3)? (STDERR)   receipt:
+W20180816-01:16:54.562(3)? (STDERR)    { blockHash: '0x15f706d691585d864aae33c0a6c213184dc0577be975a895e48bb686a79de76b',
+W20180816-01:16:54.563(3)? (STDERR)      blockNumber: 2820087,
+W20180816-01:16:54.564(3)? (STDERR)      contractAddress: null,
+W20180816-01:16:54.564(3)? (STDERR)      cumulativeGasUsed: 498028,
+W20180816-01:16:54.565(3)? (STDERR)      from: '0xd601682a7584a7541c639899454d201fe3270e9c',
+W20180816-01:16:54.566(3)? (STDERR)      gasUsed: 498028,
+W20180816-01:16:54.567(3)? (STDERR)      logs: [],
+W20180816-01:16:54.567(3)? (STDERR)      logsBloom: '0x00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000',
+W20180816-01:16:54.569(3)? (STDERR)      status: '0x0',
+W20180816-01:16:54.569(3)? (STDERR)      to: '0xc052bc0c5a06e0dfa1e37659be67d134241d5e74',
+W20180816-01:16:54.570(3)? (STDERR)      transactionHash: '0xff59fb37ba42bd3447e5809c5f3c0c8f227f7ed3e4c029f1a37e3d814c0c45d7',
+W20180816-01:16:54.571(3)? (STDERR)      transactionIndex: 0 } }
