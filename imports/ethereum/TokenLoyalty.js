@@ -207,9 +207,6 @@ export default class TokenLoyalty {
 
       this.contract.deployed()
       .then(function(instance) {
-
-        console.error("2-1");
-
         instance.activate(data.tokenId, {from: that.address, gas:700000, gasPrice:"20000000000"})
         .then(result => cb(result))
         .catch(error => console.error(error));
@@ -217,8 +214,6 @@ export default class TokenLoyalty {
       .catch(error => console.error(error));
     }
     else {
-      console.error("2-2");
-
       this.instance.activate(data.tokenId, {from: that.address, gas:700000, gasPrice:"20000000000"})
         .then(result => cb(result))
         .catch(error => console.error(error));
@@ -233,9 +228,6 @@ export default class TokenLoyalty {
 
       this.contract.deployed()
       .then(function(instance) {
-
-        console.error("3-1");
-
         instance.getSubPoolExtension.call(subPoolId)
         .then(result => cb(result))
         .catch(error => console.error(error));
@@ -243,8 +235,6 @@ export default class TokenLoyalty {
       .catch(error => console.error(error));
     }
     else {
-      console.error("3-2");
-
       this.instance.getSubPoolExtension.call(subPoolId)
         .then(result => cb(result))
         .catch(error => console.error(error));
@@ -259,9 +249,6 @@ export default class TokenLoyalty {
 
       this.contract.deployed()
       .then(function(instance) {
-
-        console.error("4-1");
-
         instance.fund(data.subPoolId, data.payment, data.debit, {from: that.address, value: data.value, gas:700000, gasPrice:"20000000000"})
         .then(result => cb(result))
         .catch(error => console.error(error));
@@ -269,8 +256,6 @@ export default class TokenLoyalty {
       .catch(error => console.error(error));
     }
     else {
-      console.error("4-2");
-
       this.instance.fund(data.subPoolId, data.payment, data.debit, {from: that.address, value: data.value, gas:700000, gasPrice:"20000000000"})
         .then(result => cb(result))
         .catch(error => console.error(error));
@@ -286,9 +271,6 @@ export default class TokenLoyalty {
 
       this.contract.deployed()
       .then(function(instance) {
-
-        console.error("5-1");
-
         instance.payment(data.tokenId, {from: this.tokenAddr, gas:700000, gasPrice:"20000000000"})
         .then(result => cb(result))
         .catch(error => console.error(error));
@@ -296,8 +278,6 @@ export default class TokenLoyalty {
       .catch(error => console.error(error));
     }
     else {
-      console.error("5-2");
-
       this.instance.payment(data.tokenId, {from: this.tokenAddr, gas:700000, gasPrice:"20000000000"})
         .then(result => cb(result))
         .catch(error => console.error(error));
