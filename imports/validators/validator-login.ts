@@ -8,10 +8,9 @@ Accounts.validateNewUser((user: User) => {
 
   if (user.profile && user.profile.role == Role.OWNER) {
 
-    if (Users.collection.findOne({ 'profile.role': Role.OWNER })) 
+    if (Users.collection.findOne({ 'profile.role': Role.OWNER })) {
       throw new Meteor.Error(403, 'The owner user already exists.');
-      
+    }
   }
-
   return true;
 });

@@ -1,42 +1,43 @@
-import { Meteor }           from 'meteor/meteor';
-import Web3                 from 'web3';
-import contract             from 'truffle-contract';
-import HDWalletProvider     from 'truffle-hdwallet-provider';
+import { Meteor } from 'meteor/meteor';
 
-import TokenLoyaltyArtifact from './build/contracts/TokenLoyalty.json';
-import { moment }           from 'meteor/momentjs:moment';
+declare function require(url: string);
 
 export default class TokenLoyalty {
 
-  instance;
-  data;
-  web3Provider;
-  address;
-  tokenAddr;
-  web3;
-  contract;
-  watch;
-  partner;
+  protected instance;
+  protected data;
+  protected web3Provider;
+  protected address;
+  protected tokenAddr;
+  protected web3;
+  protected contr;
+  protected watch;
+  protected partner;
+
+  readonly HDWalletProvider = require('truffle-hdwallet-provider');
+  readonly Web3 = require('web3');
+  readonly contract = require('truffle-contract');
+  readonly moment = require('meteor/momentjs:moment');
+
+  readonly TokenLoyaltyArtifact = require('./build/contracts/TokenLoyalty.json');
 
   constructor() {
 
-    this.instance = undefined;
-    this.data = undefined;    
-    this.web3Provider = new HDWalletProvider(Meteor.settings.mnemonic, Meteor.settings.networks.rinkeby, 0, 2);
+    this.web3Provider = new this.HDWalletProvider(Meteor.settings.mnemonic, Meteor.settings.networks.rinkeby, 0, 2);
     this.address = this.web3Provider.addresses[0];
     this.tokenAddr = this.web3Provider.addresses[1];
     console.log(`Set provider with contract owner: [${this.address}] and token owner: [${this.tokenAddr}]`);
     
-    this.web3 = new Web3(this.web3Provider);
+    this.web3 = new this.Web3(this.web3Provider);
 
-    this.contract = contract(TokenLoyaltyArtifact);
-    this.contract.setProvider(this.web3.currentProvider);
+    this.contr = this.contract(this.TokenLoyaltyArtifact);
+    this.contr.setProvider(this.web3.currentProvider);
     this.watch = undefined;
     this.partner = undefined;
 
     const that = this;
 
-    this.contract.deployed()
+    this.contr.deployed()
     .then(function(instance) {
       console.log('TokenLoyalty: instance is ready');
       that._setInstance(instance);
@@ -52,8 +53,8 @@ export default class TokenLoyalty {
           console.log(`Loyalty Token ID ${responce.args.tokenId.toString()} is created. Sub Pool ID ${responce.args.supPoolId.toString()}. Address ${responce.args.member}. Client ID ${responce.args.clientId}`);
           
           that.getSubPoolInfo(responce.args.supPoolId.toString(), (result) => {
-            const timestamp = moment.unix(result[0].toString()).format("MMMM Do YYYY, h:mm:ss a");
-            const closure = moment.unix(result[1].toString()).format("MMMM Do YYYY, h:mm:ss a");
+            const timestamp = this.moment.unix(result[0].toString()).format("MMMM Do YYYY, h:mm:ss a");
+            const closure = this.moment.unix(result[1].toString()).format("MMMM Do YYYY, h:mm:ss a");
             const subPool = {
               created:timestamp,
               closed:closure,
@@ -78,8 +79,8 @@ export default class TokenLoyalty {
           console.log(`Loyalty Token ID ${responce.args.tokenId.toString()} is activated. Sub Pool ID ${responce.args.subPoolId.toString()}`);
 
           that.getSubPoolInfo(responce.args.subPoolId.toString(), (result) => {
-            const timestamp = moment.unix(result[0].toString()).format("MMMM Do YYYY, h:mm:ss a");
-            const closure = moment.unix(result[1].toString()).format("MMMM Do YYYY, h:mm:ss a");
+            const timestamp = this.moment.unix(result[0].toString()).format("MMMM Do YYYY, h:mm:ss a");
+            const closure = this.moment.unix(result[1].toString()).format("MMMM Do YYYY, h:mm:ss a");
             const subPool = {
               created:timestamp,
               closed:closure,
@@ -104,8 +105,8 @@ export default class TokenLoyalty {
           console.log(`Loyalty SubPool ID ${responce.args.subPoolId.toString()} is funded.`);
 
           that.getSubPoolInfo(responce.args.subPoolId.toString(), (result) => {
-            const timestamp = moment.unix(result[0].toString()).format("MMMM Do YYYY, h:mm:ss a");
-            const closure = moment.unix(result[1].toString()).format("MMMM Do YYYY, h:mm:ss a");
+            const timestamp = this.moment.unix(result[0].toString()).format("MMMM Do YYYY, h:mm:ss a");
+            const closure = this.moment.unix(result[1].toString()).format("MMMM Do YYYY, h:mm:ss a");
             const subPool = {
               created:timestamp,
               closed:closure,
@@ -130,8 +131,8 @@ export default class TokenLoyalty {
           console.log(`Loyalty Token ID ${responce.args.tokenId.toString()} is paid.`);
 
           that.getSubPoolInfo(responce.args.subPoolId.toString(), (result) => {
-            const timestamp = moment.unix(result[0].toString()).format("MMMM Do YYYY, h:mm:ss a");
-            const closure = moment.unix(result[1].toString()).format("MMMM Do YYYY, h:mm:ss a");
+            const timestamp = this.moment.unix(result[0].toString()).format("MMMM Do YYYY, h:mm:ss a");
+            const closure = this.moment.unix(result[1].toString()).format("MMMM Do YYYY, h:mm:ss a");
             const subPool = {
               created:timestamp,
               closed:closure,
@@ -194,7 +195,7 @@ export default class TokenLoyalty {
     this.partner = data.partner;
 
     if(this.instance === undefined) {
-      this.contract.deployed()
+      this.contr.deployed()
       .then(function(instance) {
         instance.create(data.member, data.clientId, {from: that.address, gas:900000, gasPrice:"20000000000"})
         .then(result => cb(result))
@@ -215,7 +216,7 @@ export default class TokenLoyalty {
     console.log(`TokenLoyalty:activate data.tokenId:${data.tokenId}`);
     if(this.instance === undefined) {
 
-      this.contract.deployed()
+      this.contr.deployed()
       .then(function(instance) {
         instance.activate(data.tokenId, {from: that.address, gas:700000, gasPrice:"20000000000"})
         .then(result => cb(result))
@@ -236,7 +237,7 @@ export default class TokenLoyalty {
     console.log(`TokenLoyalty:getSubPoolInfo data.subPoolId:${subPoolId}`);
     if(this.instance === undefined) {
 
-      this.contract.deployed()
+      this.contr.deployed()
       .then(function(instance) {
         instance.getSubPoolExtension.call(subPoolId)
         .then(result => cb(result))
@@ -257,7 +258,7 @@ export default class TokenLoyalty {
     console.log(`TokenLoyalty:fund data.fund:${data.subPoolId}`);
     if(this.instance === undefined) {
 
-      this.contract.deployed()
+      this.contr.deployed()
       .then(function(instance) {
         instance.fund(data.subPoolId, data.payment, data.debit, {from: that.address, value: data.value, gas:700000, gasPrice:"20000000000"})
         .then(result => cb(result))
@@ -279,7 +280,7 @@ export default class TokenLoyalty {
 
     if(this.instance === undefined) {
 
-      this.contract.deployed()
+      this.contr.deployed()
       .then(function(instance) {
         instance.payment(data.tokenId, {from: this.tokenAddr, gas:700000, gasPrice:"20000000000"})
         .then(result => cb(result))

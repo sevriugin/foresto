@@ -28,7 +28,8 @@
   "include": [
     "client/**/*.ts",
     "server/**/*.ts",
-    "imports/**/*.ts"
+    "imports/**/*.ts",
+    "./node_modules/@machinomy/types-truffle-hdwallet-provider/index.d.ts"
   ],
   "exclude": [
     "node_modules"
