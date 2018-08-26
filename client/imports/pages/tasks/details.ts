@@ -75,9 +75,9 @@ export class TaskDetails implements OnInit , OnDestroy {
   }
 
   ngOnDestroy() {
-    this.paramsSub.unsubscribe();
-    this.taskSub.unsubscribe();
-    this.tasksSub.unsubscribe();
+    if (this.paramsSub) this.paramsSub.unsubscribe();
+    if (this.taskSub)   this.taskSub.unsubscribe();
+    if (this.tasksSub)  this.tasksSub.unsubscribe();
   }  
 
 }

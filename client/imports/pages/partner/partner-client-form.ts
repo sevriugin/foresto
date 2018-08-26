@@ -1,54 +1,38 @@
-import { MeteorObservable }             from 'meteor-rxjs';
-import { Component, OnInit, OnDestroy } from '@angular/core';
-import { Observable }                   from 'rxjs';
-import { Subscription }                 from 'rxjs/Subscription';
+import { MeteorObservable }  from 'meteor-rxjs';
+import { Component }         from '@angular/core';
+import { PaginationService } from 'ng2-pagination';
 
-import { User, UserRole } from 'both/models';
-import { Users }          from 'both/collections';
+import { Client, CLIENT_SELECTOR } from 'both/models';
+import { Clients }                 from 'both/collections';
+
+import { ListForm } from '..';
 
 @Component({
   selector: 'partner-client-form',
   templateUrl: './partner-client-form.html'
 })
-export class PartnerClientForm implements OnInit, OnDestroy {
+export class PartnerClientForm extends ListForm {
 
-  clientsSub: Subscription;
-  clients: Observable <User[]>;
-  client: User;
-  clientReady: boolean;
-
-  constructor() {}
-
-  ngOnInit() {
-    this.clientsSub = MeteorObservable.subscribe('clients').subscribe(() => {
-
-      const selector = { 'profile.role': UserRole.CLIENT };
-      this.clients = Users.find(selector);
-
-      MeteorObservable.autorun().subscribe(() => {
-        this.client = Users.findOne(selector);
-        this.clientReady = true;
-      });  
-    });
+  constructor(
+    protected paginationService: PaginationService
+  ) {
+    super(
+      paginationService,
+      Clients,
+      'partner-clients',
+      CLIENT_SELECTOR,
+      { createdAt: -1 }
+    );
   }
 
-  deleteClient(user: User): void {
-    MeteorObservable.call('deleteClient', user._id).subscribe(() => {}, (error) => {
+  click(client: Client): void {
+    alert('Чтобы войти как Клиент,'+'\n'+'нужно выйти из текущего сеанса.');
+  }  
+
+  delete(client: Client): void {
+    MeteorObservable.call('deleteClient', client._id).subscribe(() => {}, (error) => {
       this.handleError(error);
     });
-  }
-
-  ngOnDestroy() {
-    this.clientsSub.unsubscribe();
-  }
-
-  handleError(e: Error): void {
-    console.error(e);
-    alert('Ошибка: ' + e.message);
-  }
-
-  alert(message: string): void {
-    alert(message);
   }
 
 }

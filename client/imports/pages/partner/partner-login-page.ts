@@ -4,7 +4,7 @@ import { ActivatedRoute, Router }       from '@angular/router';
 import { Subscription }                 from 'rxjs/Subscription';
 
 import { Users }        from 'both/collections';
-import { LoginService } from 'imports/services';
+import { ServiceLogin } from 'imports/services';
 
 @Component({
   templateUrl: './partner-login-page.html'
@@ -20,7 +20,7 @@ export class PartnerLoginPage implements OnInit, OnDestroy {
   constructor(
     readonly route: ActivatedRoute,
     readonly router: Router,
-    readonly loginService: LoginService
+    readonly loginService: ServiceLogin
   ) {}
 
   ngOnInit() {
@@ -74,8 +74,8 @@ export class PartnerLoginPage implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    this.paramsSub.unsubscribe();
-    this.partnerSub.unsubscribe();
+    if (this.paramsSub)  this.paramsSub.unsubscribe();
+    if (this.partnerSub) this.partnerSub.unsubscribe();
   }
 
   handleError(e: Error): void {

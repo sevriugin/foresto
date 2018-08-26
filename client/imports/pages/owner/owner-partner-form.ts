@@ -3,8 +3,8 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Observable }                   from 'rxjs';
 import { Subscription }                 from 'rxjs/Subscription';
 
-import { User, UserRole }  from 'both/models';
-import { Users }           from 'both/collections';
+import { Partner, PARTNER_SELECTOR } from 'both/models';
+import { Partners }                  from 'both/collections';
 
 @Component({
   selector: 'owner-partner-form',
@@ -15,32 +15,34 @@ export class OwnerPartnerForm implements OnInit, OnDestroy {
   ready: boolean;
 
   partnersSub: Subscription;
-  partners: Observable <User[]>;
-  partner: User;
+  partners: Observable <Partner[]>;
+
+  partnerSub: Subscription;
+  partnerFirst: Partner;
 
   constructor() {}
 
   ngOnInit() {
     this.partnersSub = MeteorObservable.subscribe('partners').subscribe(() => {
       
-      const selector = { 'profile.role': UserRole.PARTNER };
-      this.partners = Users.find(selector);
+      this.partners = Partners.find(PARTNER_SELECTOR);
 
-      MeteorObservable.autorun().subscribe(() => {
-        this.partner = Users.findOne(selector);
+      this.partnerSub = MeteorObservable.autorun().subscribe(() => {
+        this.partnerFirst = Partners.findOne(PARTNER_SELECTOR);
         this.ready = true;
       });  
     });
   }
 
-  deletePartner(user: User): void {
-    MeteorObservable.call('deletePartner', user._id).subscribe(() => {}, (error) => {
+  deletePartner(partner: Partner): void {
+    MeteorObservable.call('deletePartner', partner._id).subscribe(() => {}, (error) => {
       this.handleError(error);
     });
   }
  
   ngOnDestroy() {
-    this.partnersSub.unsubscribe();
+    if (this.partnersSub) this.partnersSub.unsubscribe();
+    if (this.partnerSub)  this.partnerSub.unsubscribe();
   }
 
   handleError(e: Error): void {

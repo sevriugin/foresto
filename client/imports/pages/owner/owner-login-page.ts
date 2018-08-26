@@ -3,8 +3,8 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute, Router }       from '@angular/router';
 import { Subscription }                 from 'rxjs/Subscription';
 
-import { Users }        from 'both/collections';
-import { LoginService } from 'imports/services';
+import { Owners }            from 'both/collections';
+import { ServiceLoginOwner } from 'imports/services';
 
 @Component({
   templateUrl: './owner-login-page.html'
@@ -20,7 +20,7 @@ export class OwnerLoginPage implements OnInit, OnDestroy {
   constructor(
     readonly route: ActivatedRoute,
     readonly router: Router,
-    readonly loginService: LoginService
+    readonly service: ServiceLoginOwner
   ) {}
 
   ngOnInit() {
@@ -29,13 +29,13 @@ export class OwnerLoginPage implements OnInit, OnDestroy {
     .subscribe(_id => {
 
       this.ownerSub = MeteorObservable.subscribe('owner', _id).subscribe(() => {
-        const user = Users.findOne(_id);
-        if (! user) {
+        const owner = Owners.findOne(_id);
+        if (! owner) {
           this.handleError(new Error('Пользователь не найден!'));
           return;
         }
 
-        this.email = user.emails && user.emails[0].address;
+        this.email = owner.emails && owner.emails[0].address;
         if (!this.email) {
           this.handleError(new Error('Email пользователя не задан!'));
         }
@@ -60,7 +60,7 @@ export class OwnerLoginPage implements OnInit, OnDestroy {
       return;
     }
 
-    this.loginService.loginOwner(this.email, this.pass)
+    this.service.loginOwner(this.email, this.pass)
     .then(() => {
       this.router.navigate(['/owner']);
     })
@@ -74,8 +74,8 @@ export class OwnerLoginPage implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    this.paramsSub.unsubscribe();
-    this.ownerSub.unsubscribe();
+    if (this.paramsSub) this.paramsSub.unsubscribe();
+    if (this.ownerSub)  this.ownerSub.unsubscribe();
   }
 
   handleError(e: Error): void {

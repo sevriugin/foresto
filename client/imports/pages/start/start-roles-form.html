@@ -1,43 +1,33 @@
-<h3>Войти как...</h3>
+<h3 *ngIf="ownerTable.length > 1 || partnerTable.length > 0 || clientTable.length > 0">Войти как...</h3>
 
 <nav>
   <table>
-    <tr>
-      <td *ngFor="let owner of usersOwner">
+    <tr *ngFor="let ownerRow of ownerTable">
+      <td *ngFor="let owner of ownerRow">
         <a [routerLink]="['/owner-login', owner._id]">Владелец</a>
       </td>
     </tr>
   </table>
 </nav>
   
-<h3 *ngIf="userPartner">партнер...</h3>
+<h3 *ngIf="partnerTable.length > 0">партнер...</h3>
 
 <nav>
   <table>
-    <tr>
-      <td *ngFor="let partner of usersPartner">
+    <tr *ngFor="let partnerRow of partnerTable">
+      <td *ngFor="let partner of partnerRow">
         <a [routerLink]="['/partner-login', partner._id]">{{partner.emails[0].address}}</a>
       </td>
     </tr>
   </table>
 </nav>
 
-<h3 *ngIf="userClient">клиент...</h3>
+<h3 *ngIf="clientTable.length > 0">клиент...</h3>
 
 <nav>
   <table>
-    <tr>
-      <td *ngFor="let client of usersClient_1">
-        <a [routerLink]="['/client-login', client._id]">{{client.username}}</a>
-      </td>
-    </tr>
-    <tr>
-      <td *ngFor="let client of usersClient_2">
-        <a [routerLink]="['/client-login', client._id]">{{client.username}}</a>
-      </td>
-    </tr>
-    <tr>
-      <td *ngFor="let client of usersClient_3">
+    <tr *ngFor="let clientRow of clientTable">
+      <td *ngFor="let client of clientRow">
         <a [routerLink]="['/client-login', client._id]">{{client.username}}</a>
       </td>
     </tr>

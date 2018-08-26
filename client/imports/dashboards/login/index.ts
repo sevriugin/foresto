@@ -1,4 +1,4 @@
-import { LoginDashboard }     from './login-dashboard';
+import { LoginDashboard } from './login-dashboard';
 
 export * from './login-dashboard';
 

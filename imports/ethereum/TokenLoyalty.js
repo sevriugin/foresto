@@ -8,6 +8,16 @@ import { moment }           from 'meteor/momentjs:moment';
 
 export default class TokenLoyalty {
 
+  instance;
+  data;
+  web3Provider;
+  address;
+  tokenAddr;
+  web3;
+  contract;
+  watch;
+  partner;
+
   constructor() {
 
     this.instance = undefined;

@@ -7,8 +7,8 @@ import { InjectUser }                   from 'angular2-meteor-accounts-ui';
  
 import 'rxjs/add/operator/map';
 
-import { Tokens, Users }            from 'both/collections';
-import { Token, User, UserRole }    from 'both/models';
+import { Tokens, Users }     from 'both/collections';
+import { Token, User, Role } from 'both/models';
 
 @Component({
   templateUrl: './details.html'
@@ -17,7 +17,7 @@ import { Token, User, UserRole }    from 'both/models';
 export class TokenDetails implements OnInit , OnDestroy {
 
   user: User;
-  role: UserRole;
+  role: Role;
 
   paramsSub: Subscription;
 
@@ -41,10 +41,10 @@ export class TokenDetails implements OnInit , OnDestroy {
         this.tokenId = tokenId;
         this.user = Users.findOne(Meteor.userId());
         this.role = this.user && this.user.profile && this.user.profile.role;
-        if(this.role == UserRole.PARTNER) {
+        if(this.role == Role.PARTNER) {
           this.partner = true; this.client = false;
         }
-        else if(this.role == UserRole.CLIENT) {
+        else if(this.role == Role.CLIENT) {
           this.partner = false; this.client = true;
         }
         else {
@@ -101,9 +101,9 @@ export class TokenDetails implements OnInit , OnDestroy {
   }
 
   ngOnDestroy() {
-    this.paramsSub.unsubscribe();
-    this.tokenSub.unsubscribe();
-    this.tokensSub.unsubscribe();
+    if (this.paramsSub) this.paramsSub.unsubscribe();
+    if (this.tokenSub)  this.tokenSub.unsubscribe();
+    if (this.tokensSub) this.tokensSub.unsubscribe();
   }  
 
 }

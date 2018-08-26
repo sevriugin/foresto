@@ -7,8 +7,8 @@ import { InjectUser }                   from 'angular2-meteor-accounts-ui';
  
 import 'rxjs/add/operator/map';
 
-import { SubPools, Users }            from 'both/collections';
-import { SubPool, User, UserRole }    from 'both/models';
+import { SubPools, Users }     from 'both/collections';
+import { SubPool, User, Role } from 'both/models';
 
 @Component({
   templateUrl: './details.html'
@@ -17,7 +17,7 @@ import { SubPool, User, UserRole }    from 'both/models';
 export class SubPoolDetails implements OnInit , OnDestroy {
 
   user: User;
-  role: UserRole;
+  role: Role;
 
   paramsSub: Subscription;
 
@@ -45,7 +45,7 @@ export class SubPoolDetails implements OnInit , OnDestroy {
         this.user = Users.findOne(Meteor.userId());
         this.role = this.user && this.user.profile && this.user.profile.role;
 
-        if(this.role == UserRole.OWNER) {
+        if(this.role == Role.OWNER) {
           this.owner = true; 
         }
 
@@ -106,9 +106,9 @@ export class SubPoolDetails implements OnInit , OnDestroy {
   }
 
   ngOnDestroy() {
-    this.paramsSub.unsubscribe();
-    this.subpoolSub.unsubscribe();
-    this.subpoolsSub.unsubscribe();
+    if (this.paramsSub)   this.paramsSub.unsubscribe();
+    if (this.subpoolSub)  this.subpoolSub.unsubscribe();
+    if (this.subpoolsSub) this.subpoolsSub.unsubscribe();
   }  
 
 }

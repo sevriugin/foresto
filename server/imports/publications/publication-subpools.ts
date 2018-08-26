@@ -1,10 +1,10 @@
-import { UserRole, SubPool, SUBPOOL_PUBLIC } from 'both/models';
-import { Users, SubPools }                 from 'both/collections';
+import { Role, SubPool, SUBPOOL_PUBLIC } from 'both/models';
+import { Users, SubPools }               from 'both/collections';
 
 Meteor.publish('subpool', (_id: string): Mongo.Cursor <SubPool> => {
   const user = Users.collection.findOne({ _id: Meteor.userId() });
   const role = user && user.profile && user.profile.role;
-  if (role == UserRole.OWNER) {
+  if (role == Role.OWNER) {
   
     return SubPools.collection.find(
       {_id: _id},
@@ -20,7 +20,7 @@ Meteor.publish('subpools', (): Mongo.Cursor <SubPool> => {
    
   const user = Users.collection.findOne({ _id: Meteor.userId() });
   const role = user && user.profile && user.profile.role;
-  if (role == UserRole.OWNER) {
+  if (role == Role.OWNER) {
   
     return SubPools.collection.find(
       {},

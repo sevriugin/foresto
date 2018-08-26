@@ -20,7 +20,7 @@ export class ClientOfferForm implements OnInit, OnDestroy {
   constructor() {}
 
   ngOnInit() {
-    this.offersSub = MeteorObservable.subscribe('offers').subscribe(() => {
+    this.offersSub = MeteorObservable.subscribe('client-offers').subscribe(() => {
 
       this.offers = Offers.find();
 
@@ -32,7 +32,7 @@ export class ClientOfferForm implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    this.offersSub.unsubscribe();
+    if (this.offersSub) this.offersSub.unsubscribe();
   }
 
   handleError(e: Error): void {

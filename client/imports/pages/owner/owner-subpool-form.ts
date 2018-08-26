@@ -12,10 +12,13 @@ import { SubPools }         from 'both/collections';
 })
 export class OwnerSubPoolForm implements OnInit, OnDestroy {
 
+  ready: boolean;
+
   subpoolsSub: Subscription;
   subpools: Observable <SubPool[]>;
-  subpool: SubPool;
-  subpoolReady: boolean;
+
+  subpoolSub: Subscription;
+  subpoolFirst: SubPool;
 
   constructor() {}
 
@@ -24,16 +27,16 @@ export class OwnerSubPoolForm implements OnInit, OnDestroy {
 
       this.subpools = SubPools.find();
 
-      MeteorObservable.autorun().subscribe(() => {
-        this.subpool = SubPools.findOne();
-        this.subpoolReady = true;
+      this.subpoolSub = MeteorObservable.autorun().subscribe(() => {
+        this.subpoolFirst = SubPools.findOne();
+        this.ready = true;
       }); 
     });
   }
 
-
   ngOnDestroy() {
-    this.subpoolsSub.unsubscribe();
+    if (this.subpoolsSub) this.subpoolsSub.unsubscribe();
+    if (this.subpoolSub)  this.subpoolSub.unsubscribe();
   }
 
   handleError(e: Error): void {

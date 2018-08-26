@@ -1,22 +1,21 @@
-<div [hidden]="! clientReady">
+<div [hidden]="! ready">
   <h3>Клиенты:</h3>
-  <br>
 
-  <div [hidden]="client">
+  <div [hidden]="count != 0">
+    <br>
     <h4>[ у Вас пока нет клиентов ]</h4>
   </div>
 
-  <div [hidden]="! client">
+  <div [hidden]="count == 0">
+    <pagination-controls id="partner-clients" maxSize="5" (pageChange)="curPage.next($event)"></pagination-controls>
     <ul class="items">
-      <li *ngFor="let user of clients | async">
-        <a (click)="alert('Чтобы войти как Клиент,'+'\n'+'нужно выйти из текущего сеанса.')">
+      <li *ngFor="let item of items | async">
+        <a (click)="click(item)">
           <span class="badge"></span>
-          <span class="text">{{user.username}}</span> 
+          <span class="text"><b>{{item.username}}</b></span> 
         </a>
-        <button class="delete" title="Удалить клиента" (click)="deleteClient(user)">x</button>
+        <button class="delete" title="Удалить клиента" (click)="delete(item)">x</button>
       </li>
     </ul>
   </div>
-
-  <partner-clientadd-form></partner-clientadd-form>
 </div>

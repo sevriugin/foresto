@@ -1,0 +1,21 @@
+<div [hidden]="! ready">
+  <h3>_элементы_:</h3>
+
+  <div [hidden]="count != 0">
+    <br>
+    <h4>[ у Вас пока нет _элементов_ ]</h4>
+  </div>
+
+  <div [hidden]="count == 0">
+    <pagination-controls id="_subscription_" maxSize="5" (pageChange)="curPage.next($event)"></pagination-controls>
+    <ul class="items">
+      <li *ngFor="let item of items | async">
+        <a (click)="click(item)">
+          <span class="badge"></span>
+          <span class="text">{{item._id}}</span> 
+        </a>
+        <button class="delete" title="Удалить _элемент_" (click)="delete(item)">x</button>
+      </li>
+    </ul>
+  </div>
+</div>

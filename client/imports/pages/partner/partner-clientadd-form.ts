@@ -27,13 +27,12 @@ export class PartnerClientAddForm {
 
       // create token for the new client
       if(this.token) {
-
+        
         MeteorObservable.call('createToken', clientId).subscribe(() => {
           this.reset();
         }, (error) => {
           this.handleError(error);
         });
-
       }
       else {
         this.reset();

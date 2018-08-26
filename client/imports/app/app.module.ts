@@ -3,11 +3,12 @@ import { BrowserModule }                    from '@angular/platform-browser';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AccountsModule }                   from 'angular2-meteor-accounts-ui';
 import { TextMaskModule }                   from 'angular2-text-mask';
+import { Ng2PaginationModule }              from 'ng2-pagination';
 
 import { App }       from './app';
 import { AppRouter } from './app.router';
 
-import { LoginService } from 'imports/services';
+import { LOGIN_SERVICES } from 'imports/services';
 
 import { LOGIN_DASHBOARDS } from '../dashboards/login';
 
@@ -26,6 +27,7 @@ import { SUBPOOL_PAGES }   from '../pages/subpool';
     ReactiveFormsModule,
     AppRouter,
     AccountsModule,
+    Ng2PaginationModule,    
     TextMaskModule
   ], 
   declarations: [
@@ -41,7 +43,7 @@ import { SUBPOOL_PAGES }   from '../pages/subpool';
   ],
   providers: [
     ErrorHandler,
-    LoginService
+    LOGIN_SERVICES
   ],
   bootstrap: [
     App,

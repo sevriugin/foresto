@@ -1,22 +1,21 @@
-<div [hidden]="! offerReady">  
+<div [hidden]="! ready">
   <h3>Предложения:</h3>
-  <br>
 
-  <div [hidden]="offer">
+  <div [hidden]="count != 0">
+    <br>
     <h4>[ пока нет предложений ]</h4>
   </div>
 
-  <div [hidden]="! offer">
+  <div [hidden]="count == 0">
+    <pagination-controls id="partner-offers" maxSize="5" (pageChange)="curPage.next($event)"></pagination-controls>
     <ul class="offers">
-      <li *ngFor="let item of offers | async">
-        <a>
+      <li *ngFor="let item of items | async">
+        <a (click)="click(item)">
           <span class="badge"></span>
           <span class="text">{{item.validFrom}} - {{item.expired}}: <b>{{item.header}}</b></span> 
         </a>
-        <button class="deleteOffer" title="Удалить предложение" (click)="deleteOffer(item)">x</button>
+        <button class="deleteOffer" title="Удалить предложение" (click)="delete(item)">x</button>
       </li>
     </ul>
   </div>
-
-  <partner-offeradd-form></partner-offeradd-form>
 </div>

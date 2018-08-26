@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { Router }    from '@angular/router';
 
-import { LoginService } from 'imports/services';
-import { Pattern }      from 'both/models';
+import { ServiceLoginOwner } from 'imports/services';
+import { Pattern }           from 'both/models';
 
 @Component({
   templateUrl: './owner-register-page.html'
@@ -14,7 +14,7 @@ export class OwnerRegisterPage {
 
   constructor(
     readonly router: Router,
-    readonly loginService: LoginService
+    readonly service: ServiceLoginOwner
   ) {}
 
   onInputKeypress({keyCode}: KeyboardEvent): void {
@@ -28,7 +28,7 @@ export class OwnerRegisterPage {
       return;
     }
 
-    this.loginService.registerOwner(this.email)
+    this.service.registerOwner(this.email)
     .then(() => {
       this.router.navigate(['/owner']);
     })

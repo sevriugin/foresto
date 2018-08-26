@@ -3,7 +3,7 @@ import { Router }     from '@angular/router';
 import { InjectUser } from 'angular2-meteor-accounts-ui'; 
 
 import { User }         from 'both/models';
-import { LoginService } from 'imports/services';
+import { ServiceLogin } from 'imports/services';
 
 @Component({
   selector: 'login-dashboard',
@@ -16,11 +16,11 @@ export class LoginDashboard {
 
   constructor(
     readonly router: Router,
-    readonly loginService: LoginService
+    readonly service: ServiceLogin
   ) {}
 
   logout() {
-    this.loginService.logout()
+    this.service.logout()
     .then(() => {
       this.router.navigate(['/']);
     })

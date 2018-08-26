@@ -1,5 +1,5 @@
 import 'imports/validators'; 
-import 'imports/publications'; 
+import 'server/imports/publications'; 
 import 'both/methods'; 
 
 

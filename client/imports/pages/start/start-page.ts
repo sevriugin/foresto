@@ -4,9 +4,9 @@ import { Router }                       from '@angular/router';
 import { Subscription }                 from 'rxjs/Subscription';
 import { InjectUser }                   from 'angular2-meteor-accounts-ui'; 
 
-import { User, UserRole }  from 'both/models';
-import { Users }           from 'both/collections';
-import { LoginService }    from 'imports/services';
+import { User, Role }   from 'both/models';
+import { Users }        from 'both/collections';
+import { ServiceLogin } from 'imports/services';
 
 @Component({
   templateUrl: './start-page.html'
@@ -17,19 +17,19 @@ export class StartPage implements OnInit, OnDestroy {
   user: User;
   usersSub: Subscription;
 
-  userOwnerCount: number;
-  userPartner: User;
-  userClient: User;
+  ownerCount: number;
+  partner: User;
+  client: User;
 
   constructor(
     readonly router: Router,
-    readonly loginService: LoginService
+    readonly loginService: ServiceLogin
   ) {}
 
   ngOnInit() {
     if (this.user) {
       const role = this.user.profile && this.user.profile.role;
-      if (role && [ UserRole.OWNER, UserRole.PARTNER, UserRole.CLIENT ].indexOf(role) != -1) {
+      if (role && [ Role.OWNER, Role.PARTNER, Role.CLIENT ].indexOf(role) != -1) {
         this.router.navigate(['/' + role]);
       }
       else {
@@ -44,34 +44,29 @@ export class StartPage implements OnInit, OnDestroy {
     if (! this.user) {
       this.usersSub = MeteorObservable.subscribe('users').subscribe(() => {
 
-        const selectorOwner = { 'profile.role': UserRole.OWNER };
-        const usersOwner = Users.collection.find(selectorOwner);
-        this.userOwnerCount = usersOwner.count();
+        const owners = Users.collection.find({ 'profile.role': Role.OWNER });
+        this.ownerCount = owners.count();
 
-        const selectorPartner = { 'profile.role': UserRole.PARTNER };
-        this.userPartner = Users.collection.findOne(selectorPartner);
+        this.partner = Users.collection.findOne({ 'profile.role': Role.PARTNER });
+        this.client =  Users.collection.findOne({ 'profile.role': Role.CLIENT  });
 
-        const selectorClient = { 'profile.role': UserRole.CLIENT };
-        this.userClient = Users.collection.findOne(selectorPartner);
-
-        if (this.userOwnerCount == 0) {
+        if (this.ownerCount == 0) {
 
           this.router.navigate(['/owner-register']);
+          return;
         } 
-        else if (this.userOwnerCount <= 1 && ! this.userPartner && ! this.userClient) {
+        if (this.ownerCount <= 1 && ! this.partner && ! this.client) {
 
-          const _id = usersOwner.fetch()[0]._id;
+          const _id = owners.fetch()[0]._id;
           this.router.navigate(['/owner-login', _id]);
-        }
-        
+          return;
+        }        
       });
     }
   }
 
   ngOnDestroy() {
-    if (this.usersSub) {
-      this.usersSub.unsubscribe();
-    }
+    if (this.usersSub) this.usersSub.unsubscribe();    
   }  
 
   handleError(e: Error): void {

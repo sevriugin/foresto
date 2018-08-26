@@ -1,7 +1,7 @@
 import { MongoObservable } from 'meteor-rxjs';
 
-import { UserRole, Offer } from '../models';
-import { Users }           from '.';
+import { Role, Offer } from '../models';
+import { Users }       from '.';
  
 export const Offers = new MongoObservable.Collection <Offer> ('offers');
 
@@ -14,6 +14,6 @@ Offers.allow({
 function byPartner(userId, offer) {
   const user = userId && Users.collection.findOne(userId);
   return user && user.profile 
-    && user.profile.role == UserRole.PARTNER 
+    && user.profile.role == Role.PARTNER 
     && offer._createdBy === userId;
 }

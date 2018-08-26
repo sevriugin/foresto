@@ -1,20 +1,21 @@
-<div [hidden]="! tokenReady">
+<div [hidden]="! ready">
   <h3>Токены:</h3>
-  <br>
 
-  <div [hidden]="token">
+  <div [hidden]="count != 0">
+    <br>
     <h4>[ у Вас пока нет токенов ]</h4>
   </div>
 
-  <div [hidden]="! token">
+  <div [hidden]="count == 0">
+    <pagination-controls id="partner-tokens" maxSize="5" (pageChange)="curPage.next($event)"></pagination-controls>
     <ul class="items">
-      <li *ngFor="let token of tokens | async">
-          <a [routerLink]="['/token', token._id]">
-            <span class="badge"></span>
-            <span class="text">[{{token.subPoolId}}] : {{token.nft_id}} {{token.activated? "A":""}}{{token.paid? "P":""}}<b>{{token.inprogress? "W":""}}</b></span>
-          </a>
+      <li *ngFor="let item of items | async">
+        <a (click)="click(item)">
+          <span class="badge"></span>
+          <span class="text">[{{item.subPoolId}}] : <b>{{item.nft_id}}</b> {{item.activated? "A":""}}{{item.paid? "P":""}}<b>{{item.inprogress? "W":""}}</b></span> 
+        </a>
+        <button class="delete" title="Удалить предложение" (click)="delete(item)">x</button>
       </li>
     </ul>
   </div>
-
 </div>

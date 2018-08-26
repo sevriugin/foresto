@@ -1,18 +1,18 @@
-<div [hidden]="! subpoolReady">
-  <h3>Саб-Пулы:</h3>
+<div [hidden]="! ready">
+  <h3>Саб-пулы:</h3>
   <br>
 
-  <div [hidden]="subpool">
+  <div [hidden]="subpoolFirst">
     <h4>[ у Вас пока нет саб-пулов ]</h4>
   </div>
 
-  <div [hidden]="! subpool">
+  <div [hidden]="! subpoolFirst">
     <ul class="items">
       <li *ngFor="let subpool of subpools | async">
-          <a [routerLink]="['/subpool', subpool._id]">
-            <span class="badge"></span>
-            <span class="text">[{{subpool.subPoolId}}]</span>
-          </a>
+        <a [routerLink]="['/subpool', subpool._id]">
+          <span class="badge"></span>
+          <span class="text">[{{subpool.subPoolId}}]</span>
+        </a>
       </li>
     </ul>
   </div>

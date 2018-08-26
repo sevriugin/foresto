@@ -3,10 +3,18 @@ import contract         from 'truffle-contract';
 import HDWalletProvider from 'truffle-hdwallet-provider';
 
 import SimpleStorageArtifact from './build/contracts/SimpleStorage.json';
+//import * as SimpleStorageArtifact from './build/contracts/SimpleStorage.json';
 
 const mnemonic = "first mix any adult deal sand brand about window will casual second";
 
 export default class SimpleStorage {
+
+  instance;
+  data;
+  web3Provider;
+  address;
+  web3;
+  contract;
 
   constructor() {
 

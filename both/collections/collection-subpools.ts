@@ -1,7 +1,7 @@
 import { MongoObservable } from 'meteor-rxjs';
 
-import { UserRole, SubPool } from '../models';
-import { Users }           from '.';
+import { Role, SubPool } from '../models';
+import { Users }         from '.';
  
 export const SubPools = new MongoObservable.Collection <SubPool> ('subpools');
 
@@ -14,6 +14,6 @@ SubPools.allow({
 function byPartner(userId, token) {
   const user = userId && Users.collection.findOne(userId);
   return user && user.profile 
-    && user.profile.role == UserRole.PARTNER 
+    && user.profile.role == Role.PARTNER 
     && token._createdBy === userId;
 }

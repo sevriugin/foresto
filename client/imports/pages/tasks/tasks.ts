@@ -46,7 +46,7 @@ export class TasksPage implements OnInit, OnDestroy {
   }
  
   ngOnDestroy() {
-    this.tasksSub.unsubscribe();
+    if (this.tasksSub) this.tasksSub.unsubscribe();
   }  
 
 }

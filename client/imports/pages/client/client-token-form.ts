@@ -33,7 +33,7 @@ export class ClientTokenForm implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    this.tokensSub.unsubscribe();
+    if (this.tokensSub) this.tokensSub.unsubscribe();
   }
 
   handleError(e: Error): void {

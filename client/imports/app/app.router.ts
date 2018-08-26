@@ -7,7 +7,7 @@ import { PartnerLoginPage, PartnerPage }                from '../pages/partner';
 import { ClientLoginPage, ClientPage }                  from '../pages/client';
 import { TasksPage, TaskDetails }                       from '../pages/tasks';
 import { TokenDetails }                                 from '../pages/token';
-import { SubPoolDetails }                                 from '../pages/subpool';
+import { SubPoolDetails }                               from '../pages/subpool';
 
 export const routes: Routes = [
   { path: '', redirectTo: '/start', pathMatch: 'full' },

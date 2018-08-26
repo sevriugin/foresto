@@ -1,7 +1,7 @@
 import { Users, Tokens, SubPools }  from '../collections';
 import { check }  from 'meteor/check';
 import { Meteor } from 'meteor/meteor';
-import { UserRole } from '../models';
+import { Role }   from '../models';
 
 import TokenLoyalty from 'imports/ethereum/TokenLoyalty';
 const ownerAddress = "0x2952920b5813447f86D6c30Ad1e5C0975Fe563dd";
@@ -117,7 +117,7 @@ Meteor.methods({
     const user = Users.collection.findOne(this.userId);
     const role = user && user.profile && user.profile.role;
 
-    if (role !== UserRole.PARTNER)
+    if (role !== Role.PARTNER)
       throw new Meteor.Error('405', 'Not authorized!');
  
     const token = Tokens.collection.findOne({ user_id: clientId });
@@ -130,7 +130,7 @@ Meteor.methods({
     if (! client) 
       throw new Meteor.Error('404', 'No such user!');
   
-    if (! client.profile || client.profile.role != UserRole.CLIENT)
+    if (! client.profile || client.profile.role != Role.CLIENT)
       throw new Meteor.Error('400', 'That user is not client...');
   
     if (! client.profile || client.profile._createdBy != this.userId)
@@ -149,7 +149,7 @@ Meteor.methods({
     const user = Users.collection.findOne(this.userId);
     const role = user && user.profile && user.profile.role;
 
-    if (role !== UserRole.PARTNER)
+    if (role !== Role.PARTNER)
       throw new Meteor.Error('405', 'Not authorized!');
  
     const token = Tokens.collection.findOne({ nft_id: tokenId });
@@ -174,10 +174,10 @@ Meteor.methods({
     if (!token)
       throw new Meteor.Error('404', 'Token is not created!');
 
-    if (role === UserRole.CLIENT && token.user_id !== this.userId)
+    if (role === Role.CLIENT && token.user_id !== this.userId)
       throw new Meteor.Error('405', 'CLIENT: Not authorized!');
 
-    if (role === UserRole.PARTNER && token._createdBy !== this.userId)
+    if (role === Role.PARTNER && token._createdBy !== this.userId)
       throw new Meteor.Error('405', 'PARTNER: Not authorized!');
     
     Tokens.collection.update({ nft_id: tokenId }, { $set: { inprogress:true } });
@@ -190,7 +190,7 @@ Meteor.methods({
     const user = Users.collection.findOne(this.userId);
     const role = user && user.profile && user.profile.role;
 
-    if (role !== UserRole.OWNER)
+    if (role !== Role.OWNER)
       throw new Meteor.Error('405', 'Not authorized!');
  
     const subpool = SubPools.collection.findOne({ subPoolId: subPoolId });
@@ -211,7 +211,7 @@ Meteor.methods({
     const user = Users.collection.findOne(this.userId);
     const role = user && user.profile && user.profile.role;
 
-    if (role !== UserRole.OWNER)
+    if (role !== Role.OWNER)
       throw new Meteor.Error('405', 'Not authorized!');
  
     const subpool = SubPools.collection.findOne({ subPoolId: subPoolId });
@@ -233,7 +233,7 @@ Meteor.methods({
     const user = Users.collection.findOne(this.userId);
     const role = user && user.profile && user.profile.role;
 
-    if (role !== UserRole.CLIENT)
+    if (role !== Role.CLIENT)
       throw new Meteor.Error('405', 'Not authorized!');
  
     const token = Tokens.collection.findOne({ nft_id: tokenId, user_id : this.userId });

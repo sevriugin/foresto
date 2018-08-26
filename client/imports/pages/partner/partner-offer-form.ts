@@ -1,57 +1,37 @@
-import { MeteorObservable }             from 'meteor-rxjs';
-import { Component, OnInit, OnDestroy } from '@angular/core';
-import { Observable }                   from 'rxjs';
-import { Subscription }                 from 'rxjs/Subscription';
+import { Component }         from '@angular/core';
+import { PaginationService } from 'ng2-pagination';
 
 import { Offer }  from 'both/models';
 import { Offers } from 'both/collections';
+
+import { ListForm } from '..';
 
 @Component({
   selector: 'partner-offer-form',
   templateUrl: './partner-offer-form.html'
 })
-export class PartnerOfferForm implements OnInit, OnDestroy {
+export class PartnerOfferForm extends ListForm {
 
-  offersSub: Subscription;
-  offers: Observable <Offer[]>;
-  offer: Offer;
-  offerReady: boolean;
-
-  constructor() {}
-
-  ngOnInit() {
-    this.offersSub = MeteorObservable.subscribe('offers').subscribe(() => {
-
-      this.offers = Offers.find();
-
-      MeteorObservable.autorun().subscribe(() => {
-        this.offer = Offers.findOne();
-        this.offerReady = true;
-      });  
-    });
+  constructor(
+    protected paginationService: PaginationService
+  ) {
+    super(
+      paginationService,
+      Offers,
+      'partner-offers',
+      {},
+      { validFrom: -1 }
+    );
   }
 
-  deleteOffer(offer: Offer): void {
-    if (! offer)
-      return;
+  click(offer: Offer): void {
+  }  
 
+  delete(offer: Offer): void {
     Offers.remove(offer._id).subscribe(() => {
     }, (error) => {
       this.handleError(error);
     });
-  }
-
-  ngOnDestroy() {
-    this.offersSub.unsubscribe();
-  }
-
-  handleError(e: Error): void {
-    console.error(e);
-    alert('Ошибка: ' + e.message);
-  }
-
-  alert(message: string): void {
-    alert(message);
   }
 
 }

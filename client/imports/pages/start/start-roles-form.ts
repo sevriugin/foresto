@@ -2,8 +2,8 @@ import { MeteorObservable }             from 'meteor-rxjs';
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Subscription }                 from 'rxjs/Subscription';
 
-import { User, UserRole }  from 'both/models';
-import { Users }           from 'both/collections';
+import { User, Role } from 'both/models';
+import { Users }      from 'both/collections';
 
 @Component({
   selector: 'start-roles-form',
@@ -12,13 +12,10 @@ import { Users }           from 'both/collections';
 export class StartRolesForm implements OnInit, OnDestroy {
 
   usersSub: Subscription;
-  usersOwner: User[];
-  userPartner: User;
-  usersPartner: User[];
-  userClient: User;
-  usersClient_1: User[];
-  usersClient_2: User[];
-  usersClient_3: User[];
+
+  ownerTable:   User[][] = [];
+  partnerTable: User[][] = [];
+  clientTable:  User[][] = [];
 
   constructor() {}
 
@@ -26,21 +23,23 @@ export class StartRolesForm implements OnInit, OnDestroy {
     this.usersSub = MeteorObservable.subscribe('users').subscribe(() => {
     
       MeteorObservable.autorun().subscribe(() => {
-        this.usersOwner = Users.find({ 'profile.role': UserRole.OWNER }).fetch().slice(0, 3);
-        this.userPartner = Users.findOne({ 'profile.role': UserRole.PARTNER });
-        this.usersPartner = Users.find({ 'profile.role': UserRole.PARTNER }).fetch().slice(0, 3);
-        this.userClient = Users.findOne({ 'profile.role': UserRole.CLIENT });
-        this.usersClient_1 = Users.find({ 'profile.role': UserRole.CLIENT }).fetch().slice(0, 3);
-        this.usersClient_2 = Users.find({ 'profile.role': UserRole.CLIENT }).fetch().slice(3, 6);
-        this.usersClient_3 = Users.find({ 'profile.role': UserRole.CLIENT }).fetch().slice(6, 9);
+        this.ownerTable =   this.sliceBy( Users.find({ 'profile.role': Role.OWNER   }).fetch(), 3);
+        this.partnerTable = this.sliceBy( Users.find({ 'profile.role': Role.PARTNER }).fetch(), 3);
+        this.clientTable =  this.sliceBy( Users.find({ 'profile.role': Role.CLIENT  }).fetch(), 3);
       });
     });
   }
 
-  ngOnDestroy() {
-    if (this.usersSub) {
-      this.usersSub.unsubscribe();
+  sliceBy<T>(array: T[], width: number): T[][] {
+    let table: T[][] = [];
+    for (let i = 0, l = array.length; i < l; i += width) {
+      table.push(array.slice(i, i + width));
     }
+    return table;
+  }
+
+  ngOnDestroy() {
+    if (this.usersSub) this.usersSub.unsubscribe();
   }  
 
   handleError(e: Error): void {
