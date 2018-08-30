@@ -28,8 +28,13 @@ export class PartnerClientAddForm {
       // create token for the new client
       if(this.token) {
         
-        MeteorObservable.call('createToken', clientId).subscribe(() => {
-          this.reset();
+        MeteorObservable.call('changeClient', clientId).subscribe(() => {
+
+          MeteorObservable.call('createToken', clientId).subscribe(() => {
+            this.reset();
+          }, (error) => {
+            this.handleError(new Error('Ошибка при создании токена:' + '\n' + error));
+          });
         }, (error) => {
           this.handleError(error);
         });
@@ -56,8 +61,8 @@ export class PartnerClientAddForm {
   }
 
   handleError(e: Error): void {
-    console.error(e);
-    alert('Ошибка: ' + e.message);
+    console.error(e.message.replace('\n', ' '));
+    alert('Ошибка:' + '\n' + e.message);
   }
 
 }

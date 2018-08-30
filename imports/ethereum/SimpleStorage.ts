@@ -7,38 +7,35 @@ declare function require(url: string);
 
 export default class SimpleStorage {
 
-  protected web3Provider;
-  protected address;
-  protected web3;
-  protected contract;
-  protected instance;
-  protected data;
-
   readonly SimpleStorageArtifact = require('./build/contracts/SimpleStorage.json');
 
-  constructor() {
-    
-    this.web3Provider = new HDWalletProvider(mnemonic, "http://localhost:8545");
-    this.address = this.web3Provider.addresses[0];
-    console.log(`Set provider with address: ${this.address}`);
-    
-    this.web3 = new Web3(this.web3Provider);
+  protected web3Provider = new HDWalletProvider(mnemonic, "http://localhost:8545");
+  protected address = this.web3Provider.addresses[0];
 
-    this.contract = contract(this.SimpleStorageArtifact);
+  protected web3 = new Web3(this.web3Provider);
+
+  protected contract = contract(this.SimpleStorageArtifact);
+  protected instance = undefined;
+  protected data = undefined;
+
+  constructor() {    
+    console.log(`Set provider with address: ${this.address}`);    
     this.contract.setProvider(this.web3.currentProvider);
+
+    const that = this;
 
     this.contract.deployed()
     .then((instance) => {
       console.log('SimpleStorage: instance is ready');
-      this._setInstance(instance);
-      this._refreshData();
+      that._setInstance(instance);
+      that._refreshData();
       instance.StorageSet()
       .watch((err, responce) => {
         if(err) {
           console.error(err)
         }
         else {
-          this._refreshData();
+          that._refreshData();
           console.log(responce.args._message)
         }
       });

@@ -10,6 +10,7 @@ export interface SubPool extends Item {
   debitValue: string;
   paymentAmount: string;
   value: string;
+  error_message?: string;
 }
 
 export const SUBPOOL_PUBLIC = {
@@ -22,6 +23,7 @@ export const SUBPOOL_PUBLIC = {
   numberOfActivated: 1,
   debitValue: 1,
   paymentAmount: 1,
-  value: 1
+  value: 1,
+  error_message: 1
 };
 

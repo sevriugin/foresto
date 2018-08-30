@@ -19,3 +19,6 @@
     </tr>
   </table>
 </div>
+
+<p [hidden]="! user.profile.error_message"><b>Ошибка: </b>{{user.profile.error_message}}</p>
+<p [hidden]="! user.profile.inprogress"><b>Ожидает подтверждения создания токена от блокчейна...</b></p>

@@ -63,13 +63,14 @@ export class TokenDetails implements OnInit , OnDestroy {
       });
   }
 
-  activate(tokenId:string): void {
+  activate(tokenId: string): void {
 
     MeteorObservable.call('changeToken', tokenId).subscribe(() => {
 
       MeteorObservable.call('activateToken', tokenId).subscribe(() => {
         this.reset();
       }, (error) => {
+        MeteorObservable.call('changeToken', tokenId, false).subscribe();
         this.handleError(error);
       });
     }, (error) => {
@@ -77,13 +78,14 @@ export class TokenDetails implements OnInit , OnDestroy {
     });
   }
 
-  pay(tokenId:string): void {
+  pay(tokenId: string): void {
 
     MeteorObservable.call('changeToken', tokenId).subscribe(() => {
 
       MeteorObservable.call('payToken', tokenId).subscribe(() => {
         this.reset();
       }, (error) => {
+        MeteorObservable.call('changeToken', tokenId, false).subscribe();
         this.handleError(error);
       });
     }, (error) => {

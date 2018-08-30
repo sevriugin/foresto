@@ -12,6 +12,7 @@
   <p><b>Debit: </b>{{subpool.debitValue}}</p>
   <p><b>Payment: </b>{{subpool.paymentAmount}}</p>
   <p><b>Value: </b>{{subpool.value}}</p>
+  <p [hidden]="! subpool.error_message"><b>Error: </b>{{subpool.error_message}}</p>
   
 </header>
 

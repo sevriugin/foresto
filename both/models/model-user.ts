@@ -3,6 +3,8 @@ import { Item, Role } from '.';
 interface Profile {
   role: Role;
   _createdBy?: string;
+  inprogress?: boolean;
+  error_message?: string;
 }
 
 export interface User extends Item, Meteor.User {

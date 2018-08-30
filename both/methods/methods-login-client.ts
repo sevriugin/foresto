@@ -47,6 +47,9 @@ Meteor.methods({
       throw new Meteor.Error('403', 'No permissions!');
     }
 
+    if (client.profile && client.profile.inprogress) {
+      throw new Meteor.Error('403', 'Waits for token create confirmation!');
+    }
     const token: Token = Tokens.collection.findOne( { 'user_id': clientId } );
     if (token) {
       throw new Meteor.Error('402', 'Client has tokens!');

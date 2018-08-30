@@ -77,6 +77,7 @@ export class SubPoolDetails implements OnInit , OnDestroy {
       MeteorObservable.call('fundSubPool', this.subpool.subPoolId, this.payment.toString(), this.debit.toString(), this.value.toString()).subscribe(() => {
         this.reset();
       }, (error) => {
+        MeteorObservable.call('changeSubPool', this.subpool.subPoolId, false).subscribe();
         this.handleError(error);
       });
     }, (error) => {

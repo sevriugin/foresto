@@ -12,7 +12,7 @@
       <li *ngFor="let item of items | async">
         <a (click)="click(item)">
           <span class="badge"></span>
-          <span class="text">[{{item.subPoolId}}] : <b>{{item.nft_id}}</b> {{item.activated? "A":""}}{{item.paid? "P":""}}<b>{{item.inprogress? "W":""}}</b></span> 
+          <span class="text">[{{item.subPoolId}}] : <b>{{item.nft_id}}</b>{{item.activated? " A":""}}{{item.paid? " P":""}}<b>{{item.inprogress? " W":""}}</b><b>{{item.error_message? " E":""}}</b></span>
         </a>
         <button class="delete" title="Удалить предложение" (click)="delete(item)">x</button>
       </li>
