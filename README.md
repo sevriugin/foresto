@@ -2,51 +2,24 @@
 
 The project is designed to be a mobile application. It realizes insurance for customers as blockchain tokens. The tokens to be a part of ethereum smart contracts. Partners emit tokens to customers.
 
-1. Install meteor: https://www.meteor.com/install
-2. Clone the project to a folder:
-   * git clone https://github.com/alexander-neznakhin/meteor-token myApp
-   * cd myApp
+1. Install meteor:
+   * curl https://install.meteor.com/ | sh
    
-3. Install meteor packages:
-
-   try
-
-   * meteor npm install
-
-   or
-
-   * meteor add accounts-base
-   * meteor add accounts-meteor-developer
-   * meteor add accounts-password
-   * meteor add accounts-ui
-   * meteor add alanning:roles
-   * meteor add angular-compilers
-   * meteor add check
-   * meteor add ecmascript
-   * meteor add email
-   * meteor add meteor add es5-shim
-   * meteor add meteor-base
-   * meteor add mobile-experience
-   * meteor add mongo
-   * meteor add npm-bcrypt
-   * meteor add reactive-var
-   * meteor add session
-   * meteor add shell-server
-   * meteor add standard-minifier-css
-   * meteor add standard-minifier-js
-   * meteor add tracker
-   * meteor npm install --save web3 
-   * meteor npm install --save truffle
-   * meteor npm install --save truffle-contract 
-   * meteor npm install --save truffle-hdwallet-provider 
-4. Start meteor:
+2. Select parent folder for the project.
+   
+3. Clone the project:
+   * git clone https://github.com/alexander-neznakhin/meteor-token Meteor-Server
+   
+4. Jump to the folder: 
+   * cd Meteor-Server
+   
+5. Start:
    * meteor -s settings.json -p 3001
-5. Open: http://localhost:3000
+   
+6. Open: 
+   * http://localhost:3001
 
-Later
-
-6. To get updates:
-
+7. Later, to get updates, from Meteor-Server:
    * git pull
 
 For a while use: 
