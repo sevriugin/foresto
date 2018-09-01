@@ -13,16 +13,18 @@ The project is designed to be a mobile application. It realizes insurance for cu
 4. Jump to the folder: 
    * cd Meteor-Server
    
-5. Start:
+5. Install meteor packages:
+   * meteor npm install
+
+6. Start:
    * meteor -s settings.json -p 3001
    
-6. Open: 
+7. Open: 
    * http://localhost:3001
 
-7. Later, to get updates, from Meteor-Server:
+8. Later, to get updates, from Meteor-Server:
    * git pull
 
-For a while use: 
-
+For a while, use: 
    * ****** as fixed password,
    * 1111 as fixed SMS-code.
