@@ -8,13 +8,16 @@ import { Owner, OWNER_SELECTOR,
          Client, CLIENT_SELECTOR }  from '../models';
 
 import TokenLoyalty from 'imports/ethereum/TokenLoyalty';
+import TokenLCST from 'imports/ethereum/TokenLCST';
 
 const ownerAddress = "0x2952920b5813447f86D6c30Ad1e5C0975Fe563dd";
 let tokenLoyalty;
+let tokenLCST;
 
 if (Meteor.isServer) {
 
   tokenLoyalty = new TokenLoyalty();
+  tokenLCST = new TokenLCST();
   tokenLoyalty.setWatch(Meteor.bindEnvironment((data) => {
     
     if(data.event === "Created" && ! Tokens.collection.findOne({ user_id: data.clientId })) {
