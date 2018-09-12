@@ -12,7 +12,7 @@ export default class TokenLCST {
 
   protected web3Provider = new this.HDWalletProvider(
     Meteor.settings.mnemonic, 
-    Meteor.settings.networks.rinkeby, 
+    Meteor.settings.networks.rinkeby,
     0, 2
   );
   protected address = this.web3Provider.addresses[0];
@@ -41,7 +41,29 @@ export default class TokenLCST {
 
     this.contr.deployed()
     .then(function(instance) {
-      console.log('LCSToken: instance is ready');
+      console.log(`LCSToken address: [${instance.address}]`);
+      instance.RST().then(function(val) {
+        console.log(`LCSToken RST address: [${val}]`);
+      });
+      instance.owner().then(function(val) {
+        console.log(`LCSToken Owner address: [${val}]`);
+      });
+      instance.joinAmountRST().then(function(val) {
+        console.log(`LCSToken Join Amount: ${val}`);
+      });
+      instance.appNumber().then(function(val) {
+        const appNumber = parseInt(val, 10);
+        console.log(`LCSToken Applications number: ${appNumber}`);
+        if(appNumber > 0) {
+          that.instance.fssf( {from: that.address, gas:900000, gasPrice:"20000000000"} )
+            .then(result => {
+              console.log(`LCSToken Scoring TX: ${result.tx}`);
+            })
+            .catch(error => {
+              console.error(error);
+            });
+        }
+      });
       that._setInstance(instance);
       that._refreshData();
 
